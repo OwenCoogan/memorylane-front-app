@@ -40,7 +40,7 @@
 
 <script>
 import axios from 'axios'
-import Loader from '@/assets/svg/Loader'
+import Loader from '@/assets/svg/Loader.vue'
 export default {
   name: 'CreatePostForm',
   props: {

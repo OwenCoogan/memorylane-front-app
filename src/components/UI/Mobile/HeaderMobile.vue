@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import DocumentPictogram from '../../../assets/svg/DocumentPictogram.vue'
-import SettingsPictogram from '../../../assets/svg/SettingsPictogram.vue'
+import DocumentPictogram from '@/assets/svg/DocumentPictogram.vue'
+import SettingsPictogram from '@/assets/svg/SettingsPictogram.vue'
 export default {
   name: 'Header',
   props: {

@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import SwitchPosition from '@/components/UI/Utilities/NavigateToPosition'
+import SwitchPosition from '@/components/UI/Utilities/NavigateToPosition.vue'
 export default {
   name: 'PostCard',
   props: {
@@ -41,7 +41,7 @@ export default {
     },
     img: {
       type: String,
-      default: '../image-path/image-name.jpg',
+      default: '@/image-path/image-name.jpg',
     },
     description: {
       type: String,

@@ -2,17 +2,24 @@
   <div class="w-2/3 z-40" id="mapContainer">
     <Loader class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"/>
   </div>
+  <input type="range" min="0.00000001" max="0.3" step="10" v-model="range">
 </template>
 <script>
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import Loader from '@/assets/svg/Loader'
-import { mapState } from 'vuex';
+import Loader from '@/assets/svg/Loader.vue';
+
+import { useGeolocationStore } from '../../stores/geolocation';
+import { usePostsStore } from '../../stores/posts';
+const geolocationStore = useGeolocationStore()
+const postStore = usePostsStore()
 export default {
   name: "LeafletMap",
-  computed: mapState(['location']),
   components: {
       Loader,
+  },
+  setup() {
+    return postStore
   },
   data() {
     return {
@@ -30,32 +37,29 @@ export default {
     },
     setPostsMarkers(posts){
       posts.forEach((item) => {
-        if(item.gpsPositionLat && item.gpsPositionLong){
-          L.circle([item.gpsPositionLat,item.gpsPositionLong],{radius: 5}).addTo(this.map);
+        if(item.latitude && item.longitude){
+          L.circle([item.latitude,item.longitude],{radius: 5}).addTo(this.map);
         }
       })
     }
 
   },
-  mounted() {
-    this.posts = this.$store.state.currentPostList;
-    this.$store.dispatch('currentLocation')
+  async mounted() {
+    this.posts = postStore.posts
+    await geolocationStore.getCurrentPosition()
     .then(this.mapLoaded = true)
     .then(coordinates => {
     localStorage.setItem('coordinates', JSON.stringify(coordinates));
     this.map = L.map("mapContainer").setView([coordinates.lat,coordinates.long], 200);
-    this.$store.subscribe((mutation)=>{
-      if(mutation.type === "UPDATE_CURRENT_POSITION"){
-        let postPosition = this.$store.state.currentPosition
-        this.map.setView([postPosition.lat,postPosition.long], 200);
-      }
-    })
     this.setCurrentPositionMarker(coordinates);
     L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
-    }).addTo(this.map)
+    })
+
+    .addTo(this.map)
     .then(this.setPostsMarkers(this.posts))
     setInterval(function() {
       localStorage.setItem('coordinates', JSON.stringify(coordinates));
+      geolocationStore.getCurrentPosition()
     })
     }, 60 * 1000);
 

@@ -19,9 +19,9 @@
 </template>
 
 <script>
-import Loader from '@/assets/svg/Loader'
+import Loader from '@/assets/svg/Loader.vue'
 import axios from 'axios'
-import UploadImageForm from '../components/UI/Form/UploadImageForm.vue'
+import UploadImageForm from '@/components/UI/Form/UploadImageForm.vue'
 export default {
   name: 'PostPage',
 

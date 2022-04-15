@@ -23,8 +23,12 @@
   </div>
 </template>
 <script>
-import PostCard from '@/components/UI/PostCard'
-import CreatePostForm from '@/components/UI/Form/PostForm'
+import PostCard from '@/components/UI/PostCard.vue'
+import CreatePostForm from '@/components/UI/Form/PostForm.vue'
+import { useGeolocationStore } from '../../stores/geolocation';
+import { usePostsStore } from '../../stores/posts'
+const postStore = usePostsStore()
+const geolocationStore = useGeolocationStore()
 export default {
   name: 'PostList',
   props: {
@@ -37,15 +41,24 @@ export default {
     return{
       posts:null,
       formPostCreateShown:false,
+      loading:false
     }
   },
   mounted(){
-    this.posts = this.$store.state.currentPostList.reverse();
+    this.posts = postStore.posts;
+    geolocationStore.$subscribe((mutation) => {
+        this.getPosts();
+    })
   },
   methods:{
     toggleForm(){
       this.formPostCreateShown = !this.formPostCreateShown;
-    }
+    },
+    async getPosts(req,res){
+      await postStore.getPosts(req,res)
+      .then( res => this.posts = postStore.posts)
+      .then(this.loading = false)
+    },
   }
 }
 </script>

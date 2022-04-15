@@ -1,29 +1,31 @@
 <template>
   <div class="flex">
-    <PostList v-if="this.device !='Mobile'"/>
-    <PostListMobile v-else/>
+    <PostList/>
     <Map/>
   </div>
 </template>
 
 <script>
-import Map from '@/components/UI/Map'
-import PostList from '@/components/UI/PostList'
-import PostListMobile from '@/components/UI/Mobile/PostListMobile'
+import Map from '@/components/UI/Map.vue'
+import PostList from '@/components/UI/PostList.vue'
+import { useGeolocationStore } from '../stores/geolocation';
+import { usePostsStore } from '../stores/posts';
+const geolocationStore = useGeolocationStore()
+const postStore = usePostsStore()
+
 export default {
   name: "LeafletMap",
   components: {
       Map,
       PostList,
-      PostListMobile
   },
   data() {
     return {
-        posts: [],
-        device : this.$store.state.device,
+        device : "dev",
     };
   },
   created() {
+    postStore.getPosts()
   }
 };
 </script>
