@@ -1,8 +1,8 @@
 <template>
   <div class="w-2/3 z-40" id="mapContainer">
     <Loader class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"/>
+    <input type="range" min="0.1" max="0.3" step="10000" class="w-full h-2 bg-blue-100 appearance-none" v-model="range">
   </div>
-  <input type="range" min="0.00000001" max="0.3" step="10" v-model="range">
 </template>
 <script>
 import "leaflet/dist/leaflet.css";
@@ -54,7 +54,6 @@ export default {
     this.setCurrentPositionMarker(coordinates);
     L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
     })
-
     .addTo(this.map)
     .then(this.setPostsMarkers(this.posts))
     setInterval(function() {
@@ -62,7 +61,17 @@ export default {
       geolocationStore.getCurrentPosition()
     })
     }, 60 * 1000);
-
+    geolocationStore.$subscribe((payload) => {
+        console.log(payload)
+        const position = {
+            latitude:parseInt(payload.latitude),
+            longitude:parseInt(payload.longitude)
+        }
+        console.log(position)
+        this.setCurrentPositionMarker({
+            position
+        });
+    })
   }
 };
 </script>

@@ -20,8 +20,10 @@
 
 <script>
 import Loader from '@/assets/svg/Loader.vue'
-import axios from 'axios'
 import UploadImageForm from '@/components/UI/Form/UploadImageForm.vue'
+import { usePostsStore } from '../stores/posts'
+
+const postStore = usePostsStore()
 export default {
   name: 'PostPage',
 
@@ -43,15 +45,13 @@ export default {
     }
   },
   mounted(){
-    this.getPost(`http://localhost:6950/v1/posts/${this.$route.params.id}`)
-
+    postStore.getSinglePost({
+      id:this.$route.params.id
+    }).then(res=>{
+      console.log(res.data)
+      this.post = res.data
+      this.isLoading = false
+    })
   },
-  methods:{
-    async getPost(url){
-        await axios.get(url)
-        .then( res => this.post = res.data.data)
-        .then(this.isLoading = false)
-    }
-  }
 }
 </script>

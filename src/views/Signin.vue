@@ -63,45 +63,43 @@
 </template>
 
 <script>
-import User from '../models/user';
+
+import { useUsersStore } from '../stores/users'
+const UsersStore = useUsersStore()
 
 export default {
   name: 'Signin',
   data() {
     return {
-      user: new User('', ''),
+      user: {
+        email: '',
+        password: ''
+      },
       loading: false,
       message: ''
     };
   },
   computed: {
     loggedIn() {
-      return this.$store.state.auth.status.loggedIn;
     }
   },
   created() {
-    if (this.loggedIn) {
-      this.$router.push('/profile');
-    }
   },
   methods: {
-    handleLogin(e) {
+    async handleLogin(e) {
       e.preventDefault();
       this.loading = true;
-          this.$store.dispatch('auth/login', this.user).then(
-            (res) => {
-              this.$router.push('/map');
-              return res
-            },
-            error => {
-              this.loading = false;
-              this.message =
-                (error.response && error.response.data) ||
-                error.message ||
-                error.toString();
-            }
-          );
+      await UsersStore.login(this.user)
+      .then(response => {
+        if(UsersStore.auth.token){
+          this.$router.push('/map')
         }
+      })
+      .catch(error => {
+        this.loading = false;
+        this.message = 'Server Error';
+      })
+      }
     }
 };
 </script>

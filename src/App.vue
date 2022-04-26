@@ -1,6 +1,5 @@
 <template>
   <Header/>
-  <HeaderMobile/>
   <router-view/>
 </template>
 <script>

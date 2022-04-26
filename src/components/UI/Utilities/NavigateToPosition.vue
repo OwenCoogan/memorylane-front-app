@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import { useGeolocationStore } from '../../../stores/geolocation';
+const geolocationStore = useGeolocationStore()
 export default {
   name: 'SwitchPosition',
   props: {
@@ -28,10 +30,10 @@ export default {
   methods:{
     switchPosition(lat,long){
       const payload = {
-        lat : lat,
-        long : long
+        latitude : lat,
+        longitude : long
       }
-      this.$store.dispatch('navigateToPostPoint',payload)
+     geolocationStore.switchCurrentPosition(payload)
     }
   }
 }

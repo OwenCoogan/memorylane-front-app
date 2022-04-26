@@ -41,6 +41,9 @@
 <script>
 import axios from 'axios'
 import Loader from '@/assets/svg/Loader.vue'
+import { useGeolocationStore } from '../../../stores/geolocation';
+const geolocationStore = useGeolocationStore()
+
 export default {
   name: 'CreatePostForm',
   props: {
@@ -61,10 +64,11 @@ export default {
     }
   },
   mounted(){
-    let currentPosition = this.$store.state.geolocation
+    let currentPosition = geolocationStore.currentPosition;
+    console.log(currentPosition)
     this.position = {
-        gpsPositionLat:currentPosition.lat,
-        gpsPositionLong:currentPosition.long,
+        gpsPositionLat:currentPosition.latitude,
+        gpsPositionLong:currentPosition.longitude,
     }
   },
   methods:{
@@ -75,7 +79,6 @@ export default {
           content:this.content,
           latitude:this.position.gpsPositionLat,
           longitude:this.position.gpsPositionLong,
-          userId:this.$store.state.auth.user.id
       })
 
       .then(this.loading = false)

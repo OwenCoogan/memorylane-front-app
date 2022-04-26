@@ -33,6 +33,12 @@ export const useGeolocationStore = defineStore({
           reject();
         }
       });
+    },
+    async switchCurrentPosition(payload:any){
+      console.log(this.currentPosition)
+      this.currentPosition.latitude = payload.latitude;
+      this.currentPosition.longitude = payload.longitude;
+      console.log(this.currentPosition)
     }
   }
 })

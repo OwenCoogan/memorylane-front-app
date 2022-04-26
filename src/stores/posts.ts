@@ -12,7 +12,12 @@ export const usePostsStore = defineStore({
     async getPosts(){
       const posts = await axios.get("http://localhost:6950/v1/posts")
       this.posts = posts.data.data
-      return posts
+      return posts.data
+    },
+    async getSinglePost(req:object){
+      console.log(req)
+      const post = await axios.get(`http://localhost:6950/v1/posts/${req.id}`)
+      return post.data
     }
   }
 })
