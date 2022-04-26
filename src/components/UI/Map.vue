@@ -55,22 +55,16 @@ export default {
     L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
     })
     .addTo(this.map)
-    .then(this.setPostsMarkers(this.posts))
+    //.then(this.setPostsMarkers(this.posts))
     setInterval(function() {
-      localStorage.setItem('coordinates', JSON.stringify(coordinates));
       geolocationStore.getCurrentPosition()
     })
     }, 60 * 1000);
-    geolocationStore.$subscribe((payload) => {
-        console.log(payload)
-        const position = {
-            latitude:parseInt(payload.latitude),
-            longitude:parseInt(payload.longitude)
+    geolocationStore.$subscribe((mutation) => {
+        console.log(mutation.payload)
+        if(mutation.payload.activeGeolocation){
+        this.map.setView([mutation.payload.currentMarkerPosition.latitude,mutation.payload.currentMarkerPosition.longitude], 200);
         }
-        console.log(position)
-        this.setCurrentPositionMarker({
-            position
-        });
     })
   }
 };

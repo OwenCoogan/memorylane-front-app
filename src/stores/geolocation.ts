@@ -3,11 +3,12 @@ const { geolocation } = navigator;
 export const useGeolocationStore = defineStore({
   id:'geolocation',
   state:()=>({
-    currentPosition:{
+    currentMarkerPosition:{
       latitude:1,
       longitude:1,
       range:1
-    }
+    },
+    activeGeolocation:true,
   }),
   getters:{
   },
@@ -17,13 +18,14 @@ export const useGeolocationStore = defineStore({
         if (geolocation) {
           geolocation
             .getCurrentPosition(({ coords }) => {
-              const currentPosition = {
+              const currentMarkerPosition = {
                 long: coords.longitude,
                 lat: coords.latitude,
               };
-              this.currentPosition.latitude = coords.latitude,
-              this.currentPosition.longitude = coords.longitude,
-              resolve(currentPosition);
+              this.currentMarkerPosition.latitude = coords.latitude,
+              this.currentMarkerPosition.longitude = coords.longitude,
+              this.activeGeolocation=true,
+              resolve(currentMarkerPosition);
             },
             (err) => {
               reject(err);
@@ -34,11 +36,5 @@ export const useGeolocationStore = defineStore({
         }
       });
     },
-    async switchCurrentPosition(payload:any){
-      console.log(this.currentPosition)
-      this.currentPosition.latitude = payload.latitude;
-      this.currentPosition.longitude = payload.longitude;
-      console.log(this.currentPosition)
-    }
   }
 })

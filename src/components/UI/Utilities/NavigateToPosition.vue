@@ -28,12 +28,19 @@ export default {
     this.position
   },
   methods:{
-    switchPosition(lat,long){
+    async switchPosition(lat,long){
       const payload = {
         latitude : lat,
         longitude : long
       }
-     geolocationStore.switchCurrentPosition(payload)
+      geolocationStore.$patch({
+        currentMarkerPosition:{
+          latitude : lat,
+          longitude : long,
+
+        },
+        activeGeolocation:false,
+      })
     }
   }
 }
