@@ -29,10 +29,6 @@ export default {
   },
   methods:{
     async switchPosition(lat,long){
-      const payload = {
-        latitude : lat,
-        longitude : long
-      }
       geolocationStore.$patch({
         currentMarkerPosition:{
           latitude : lat,

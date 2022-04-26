@@ -17,11 +17,14 @@
 </template>
 
 <script>
+import { useUsersStore } from '../stores/users'
+const UsersStore = useUsersStore()
+console.log(UsersStore.getAuth)
 export default {
   name: 'Profile',
   computed: {
     currentUser() {
-      return this.$store.state.auth.user;
+      return
     }
   },
   mounted() {

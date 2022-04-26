@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
+import { useUsersStore } from '../stores/users'
 
 
 
@@ -22,11 +22,13 @@ const routes = [
   {
     path: '/map',
     name: 'Map',
+    meta: { requiresAuth: true },
     component: () => import('@/views/MainMap.vue')
   },
   {
     path: '/post/:id',
     name: 'Post {{ $route.params.id }}',
+    meta: { requiresAuth: true },
     component: () => import('@/views/PostPage.vue'),
   },
   {
@@ -42,6 +44,7 @@ const routes = [
   {
     path: '/profile',
     name: 'Profile',
+    meta: { requiresAuth: true },
     component: () => import(/* webpackChunkName: "about" */ '@/views/Profile.vue')
   }
 
@@ -51,6 +54,14 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes
+})
+router.beforeEach((to, from) => {
+  const userStore = useUsersStore()
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!userStore.getAuth.isAuthenticated) {
+      return router.push({ name: 'Login' })
+    }
+  }
 })
 
 export default router

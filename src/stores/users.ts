@@ -17,6 +17,9 @@ export const useUsersStore = defineStore({
     }
   }),
   getters:{
+    getAuth(state) {
+      return state.auth
+    },
   },
   actions:{
     async login(payload:any){
