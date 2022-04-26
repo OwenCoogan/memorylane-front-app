@@ -58,7 +58,7 @@ const router = createRouter({
 router.beforeEach((to, from) => {
   const userStore = useUsersStore()
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!userStore.getAuth.isAuthenticated) {
+    if (userStore.getAuth.isAuthenticated === false) {
       return router.push({ name: 'Login' })
     }
   }

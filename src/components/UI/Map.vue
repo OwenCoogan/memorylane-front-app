@@ -62,7 +62,7 @@ export default {
     }, 60 * 1000);
     geolocationStore.$subscribe((mutation) => {
         console.log(mutation.payload)
-        if(mutation.payload.activeGeolocation){
+        if(geolocationStore.activeGeolocation === false){
         this.map.setView([mutation.payload.currentMarkerPosition.latitude,mutation.payload.currentMarkerPosition.longitude], 200);
         }
     })
