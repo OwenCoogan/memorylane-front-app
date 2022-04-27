@@ -42,7 +42,6 @@
 
           <span class="text-xs text-red-700" id="passwordHelp"></span>
         </div>
-
         <div class="flex items-center justify-between">
           <button
             class="bg-blue-600 hover:bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -50,13 +49,11 @@
           >
             Sign In
           </button>
-          <a
-            class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-            href="#"
-          >
-            Forgot Password?
-          </a>
+          <router-link to="/register" class="bg-red-600 hover:bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">New User ?</router-link>
         </div>
+        <router-link to="/login" class="w-full block my-3 underline">
+            Forgot Password?
+          </router-link>
       </form>
     </div>
   </div>
@@ -91,9 +88,7 @@ export default {
       this.loading = true;
       await UsersStore.login(this.user)
       .then(response => {
-        if(UsersStore.auth.token){
           this.$router.push('/map')
-        }
       })
       .catch(error => {
         this.loading = false;

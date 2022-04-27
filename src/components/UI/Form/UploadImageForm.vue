@@ -45,7 +45,12 @@ export default {
       const formData = new FormData();
       formData.append('file',this.image);
       await axios.post(`http://localhost:6950/upload/post/${this.id}/image/add/`,formData)
-      .then(res => this.message = res.data)
+      .then(res => {
+        this.message = res.data;
+        this.$emit('updatedImageList')
+      }
+
+      )
       .catch(err => this.message = err.data)
     }
   }

@@ -12,7 +12,7 @@
             <div class="grid grid-cols-4 gap-4" v-if="post.images">
               <img v-for="image in post.images" :src="`http://localhost:6950/resources/static/assets/uploads/post/${image.name}`"  v-bind:key="image.name" />
             </div>
-          <UploadImageForm :id="this.$route.params.id"/>
+          <UploadImageForm :id="this.$route.params.id"  @updatedImageList="uploadedImage" />
           </div>
         </div>
       </div>
@@ -40,7 +40,6 @@ export default {
   data(){
     return{
       post:null,
-      file:null,
       isLoading:true
     }
   },
@@ -52,5 +51,15 @@ export default {
       this.isLoading = false
     })
   },
+  methods:{
+    uploadedImage(){
+      postStore.getSinglePost({
+      id:this.$route.params.id
+    }).then(res=>{
+      this.post = res.data
+      this.isLoading = false
+    })
+    }
+  }
 }
 </script>
