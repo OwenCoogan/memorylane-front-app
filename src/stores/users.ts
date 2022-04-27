@@ -8,7 +8,6 @@ export const useUsersStore = defineStore({
       isAuthenticated:false,
       isRegistered:false,
       email:'',
-      token:'',
       user:{
         id:0,
         name:'',
@@ -26,7 +25,6 @@ export const useUsersStore = defineStore({
       const user:Object = await axios.post('http://localhost:6950/auth/login', payload)
       .then((res)=>{
         this.auth.isAuthenticated = true;
-        this.auth.token = res.data.data.token;
         this.auth.user = {
           id:res.data.data.id,
           name:res.data.data.name,
@@ -51,20 +49,22 @@ export const useUsersStore = defineStore({
     async checkUser(){
       const token = localStorage.getItem('MemoryLaneCookie');
       if(token){
-        await axios.post('http://localhost:6950/auth/check', {token})
-        .then((res)=>{
-          this.auth.isAuthenticated = true;
-          this.auth.token = res.data.data.token;
-          this.auth.user = {
-            id:res.data.data.id,
-            name:res.data.data.name,
-            email:res.data.data.email,
-          };
-          return res
-        })
-        .catch((err)=>{
-          return err
-        })
+        if(this.auth.isAuthenticated === false){
+          await axios.post('http://localhost:6950/auth/check', {token})
+          .then((res)=>{
+            this.auth.isAuthenticated = true;
+            this.auth.user = {
+              id:res.data.data.user.id,
+              name:res.data.data.user.name,
+              email:res.data.data.user.email,
+            };
+            return this.auth.user
+          })
+          .catch((err)=>{
+            this.auth.isAuthenticated = false;
+            return err
+          })
+        }
       }
     }
 

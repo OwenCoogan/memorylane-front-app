@@ -11,7 +11,8 @@
     </p>
     <p>
       <strong>Email:</strong>
-      {{user.email}}
+      {{user
+      .email}}
     </p>
   </div>
 </template>
@@ -24,16 +25,16 @@ export default {
   data() {
     return {
     user:{
-      id:null,
-      name:null,
-      email:null,
+      id:UsersStore.getAuth.user.id,
+      name:UsersStore.getAuth.user.name,
+      email:UsersStore.getAuth.user.email,
     }
     };
   },
   computed: {
   },
   mounted() {
-    this.user = UsersStore.auth
+    console.log(UsersStore.getAuth)
   }
 };
 </script>
