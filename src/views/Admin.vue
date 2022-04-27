@@ -22,7 +22,7 @@
 
 <script>
 import axios from 'axios';
-import UpdateRole from '@/components/UI/Utilities/UpdateRole'
+import UpdateRole from '../components/UI/Utilities/UpdateRole.vue'
 export default {
   name: 'Profile',
   components:{

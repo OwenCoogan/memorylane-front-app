@@ -21,8 +21,8 @@ export const usePostsStore = defineStore({
       this.posts = posts.data.data
       return posts.data
     },
-    async getSinglePost(req:object){
-      const post = await axios.get(`http://localhost:6950/v1/posts/${req.id}`)
+    async getSinglePost(req:any){
+      const post = await axios.get(`http://localhost:6950/v1/posts/${req?.id}`)
       return post.data
     }
   }
