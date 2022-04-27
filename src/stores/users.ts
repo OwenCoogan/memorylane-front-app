@@ -49,7 +49,7 @@ export const useUsersStore = defineStore({
       const token = localStorage.getItem('MemoryLaneCookie');
       if(token){
         if(this.auth.isAuthenticated === false){
-          await axios.post(`${meta.env.API_URL}/auth/check`, {token})
+          await axios.post(`${process.env.API_URL}/auth/check`, {token})
           .then((res)=>{
             this.auth.isAuthenticated = true;
             this.auth.user = {
