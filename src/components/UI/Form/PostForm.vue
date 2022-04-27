@@ -65,7 +65,6 @@ export default {
   },
   mounted(){
     let currentPosition = geolocationStore.currentPosition;
-    console.log(currentPosition)
     this.position = {
         gpsPositionLat:currentPosition.latitude,
         gpsPositionLong:currentPosition.longitude,

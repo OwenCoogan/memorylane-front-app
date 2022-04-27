@@ -2,16 +2,16 @@
   <div class="container">
     <header class="jumbotron">
       <h3>
-        <strong>{{currentUser.firstname}}</strong>
+        <strong>{{user.name}}</strong>
       </h3>
     </header>
     <p>
       <strong>Id:</strong>
-      {{currentUser.id}}
+      {{user.id}}
     </p>
     <p>
       <strong>Email:</strong>
-      {{currentUser.email}}
+      {{user.email}}
     </p>
   </div>
 </template>
@@ -19,18 +19,21 @@
 <script>
 import { useUsersStore } from '../stores/users'
 const UsersStore = useUsersStore()
-console.log(UsersStore.getAuth)
 export default {
   name: 'Profile',
-  computed: {
-    currentUser() {
-      return
+  data() {
+    return {
+    user:{
+      id:null,
+      name:null,
+      email:null,
     }
+    };
+  },
+  computed: {
   },
   mounted() {
-    if (!this.currentUser) {
-      this.$router.push('/login');
-    }
+    this.user = UsersStore.auth
   }
 };
 </script>

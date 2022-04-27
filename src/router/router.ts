@@ -57,11 +57,17 @@ const router = createRouter({
 })
 router.beforeEach((to, from) => {
   const userStore = useUsersStore()
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (userStore.getAuth.isAuthenticated === false) {
-      return router.push({ name: 'Login' })
-    }
+  async function checkAuth() {
+    await userStore.checkUser()
+    .then(res=> {
+      if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (userStore.getAuth.isAuthenticated === false) {
+          router.push('/login')
+        }
+      }
+    })
   }
+  checkAuth()
 })
 
 export default router

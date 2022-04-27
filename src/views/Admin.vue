@@ -40,8 +40,6 @@ export default {
   },
   methods: {
     async getUsers(){
-      const token = localStorage.getItem('MemoryLaneCookie')
-      console.log(token)
       await axios.get('http://localhost:6950/auth/users',{
         token: token,
       })

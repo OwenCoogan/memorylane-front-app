@@ -35,14 +35,6 @@ export default {
     setCurrentPositionMarker(coordinates){
       this.currentMarker = L.circle([coordinates.lat,coordinates.long],{radius: 5}).addTo(this.map);
     },
-    setPostsMarkers(posts){
-      posts.forEach((item) => {
-        if(item.latitude && item.longitude){
-          L.circle([item.latitude,item.longitude],{radius: 5}).addTo(this.map);
-        }
-      })
-    }
-
   },
   async mounted() {
     this.posts = postStore.posts
@@ -53,15 +45,14 @@ export default {
     this.map = L.map("mapContainer").setView([coordinates.lat,coordinates.long], 200);
     this.setCurrentPositionMarker(coordinates);
     L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
-    })
-    .addTo(this.map)
-    //.then(this.setPostsMarkers(this.posts))
+      attribution:
+        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(this.map);
     setInterval(function() {
       geolocationStore.getCurrentPosition()
     })
     }, 60 * 1000);
     geolocationStore.$subscribe((mutation) => {
-        console.log(mutation.payload)
         if(geolocationStore.activeGeolocation === false){
         this.map.setView([mutation.payload.currentMarkerPosition.latitude,mutation.payload.currentMarkerPosition.longitude], 200);
         }

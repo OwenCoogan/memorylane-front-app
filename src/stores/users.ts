@@ -32,6 +32,7 @@ export const useUsersStore = defineStore({
           name:res.data.data.name,
           email:res.data.data.email,
         };
+        localStorage.setItem('MemoryLaneCookie', res.data.data.token);
         return user
       })
       .catch((err)=>{
@@ -46,6 +47,28 @@ export const useUsersStore = defineStore({
       .catch((err)=>{
         return err
       })
+    },
+    async checkUser(){
+      const token = localStorage.getItem('MemoryLaneCookie');
+      if(token){
+        console.log(token)
+        await axios.post('http://localhost:6950/auth/check', {token})
+        .then((res)=>{
+          console.log(res)
+          this.auth.isAuthenticated = true;
+          this.auth.token = res.data.data.token;
+          this.auth.user = {
+            id:res.data.data.id,
+            name:res.data.data.name,
+            email:res.data.data.email,
+          };
+          return res
+        })
+        .catch((err)=>{
+          return err
+        })
+      }
     }
+
   }
 })

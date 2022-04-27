@@ -48,7 +48,6 @@ export default {
     postStore.getSinglePost({
       id:this.$route.params.id
     }).then(res=>{
-      console.log(res.data)
       this.post = res.data
       this.isLoading = false
     })

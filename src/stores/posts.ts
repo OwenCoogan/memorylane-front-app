@@ -15,7 +15,6 @@ export const usePostsStore = defineStore({
       return posts.data
     },
     async getSinglePost(req:object){
-      console.log(req)
       const post = await axios.get(`http://localhost:6950/v1/posts/${req.id}`)
       return post.data
     }
