@@ -1,6 +1,11 @@
 <template>
   <div class="w-1/3 post-list--container">
-    <h2 class="text-xl text-center">Vos posts</h2>
+    <div class="list-header">
+      <h2 class="text-xl text-center">Vos posts</h2>
+      <input type="range" style="width: 80%;
+    margin: auto;
+    display: block;" min="1" max="100" class="w-full h-2 bg-blue-100 appearance-none" v-model="range" @change="this.getPosts(this.range)">
+    </div>
     <div class="postlist">
       <li v-for="post in posts" :key="post.title">
         <PostCard
@@ -47,7 +52,7 @@ export default {
   mounted(){
     this.posts = postStore.posts;
     geolocationStore.$subscribe((mutation) => {
-        this.getPosts();
+        this.getPosts(this.range);
     })
   },
   methods:{
@@ -55,8 +60,8 @@ export default {
       this.formPostCreateShown = !this.formPostCreateShown;
     },
     async getPosts(req,res){
-      await postStore.getPosts(req,res)
-      .then( res => this.posts = postStore.posts)
+      await postStore.getPosts(this.range)
+      .then(this.posts = postStore.posts)
       .then(this.loading = false)
     },
   }

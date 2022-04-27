@@ -9,8 +9,10 @@ export const useGeolocationStore = defineStore({
       range:1
     },
     activeGeolocation:true,
+    userPermission:false,
   }),
   getters:{
+    getPermissionStatus:state=>state.userPermission,
   },
   actions:{
     async initCurrentPosition(){

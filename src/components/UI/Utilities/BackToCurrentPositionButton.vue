@@ -1,5 +1,5 @@
 <template>
-  <button @click="BackToUserPosition()" :disabled="userPositionActive===true">
+  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" @click="BackToUserPosition()" :disabled="userPositionActive===true">
     <GeolocPinPicto class="w-full inline-block"/>
   </button>
 </template>

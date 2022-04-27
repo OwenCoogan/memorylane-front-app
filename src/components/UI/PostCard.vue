@@ -1,7 +1,7 @@
 <template>
   <div class="p-10">
     <!--Card 1-->
-    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+    <div class="max-w-sm rounded overflow-hidden shadow-lg m-auto">
       <img class="w-full" v-if="img[0]" :src="`http://localhost:6950/resources/static/assets/uploads/post/${img[0].name}`" :alt="img[0].name">
       <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2">{{ title }}</div>

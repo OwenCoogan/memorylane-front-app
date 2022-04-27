@@ -79,12 +79,6 @@ export default {
   computed: {
   },
   created() {
-    UsersStore.$patch(
-      {
-        auth: null
-      }
-    )
-    console.log(UsersStore.auth)
   },
   methods: {
     async handleLogin(e) {

@@ -61,7 +61,7 @@ router.beforeEach((to, from) => {
     await userStore.checkUser()
     .then(res=> {
       if (to.matched.some(record => record.meta.requiresAuth)) {
-        if (userStore.getAuth.isAuthenticated === false) {
+        if (userStore.getAuth?.isAuthenticated === false) {
           router.push('/login')
         }
       }

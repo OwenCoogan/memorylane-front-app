@@ -1,13 +1,14 @@
 <template>
   <div class="w-2/3 z-40" id="mapContainer">
     <Loader class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"/>
-    <input type="range" min="0.1" max="0.3" step="10000" class="w-full h-2 bg-blue-100 appearance-none" v-model="range">
+    <BackToCurrentPositionButton class="absolute top-5 right-5 h-16 w-16" style="z-index:9999"/>
   </div>
 </template>
 <script>
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import Loader from '@/assets/svg/Loader.vue';
+import BackToCurrentPositionButton from '../UI/Utilities/BackToCurrentPositionButton.vue';
 
 import { useGeolocationStore } from '../../stores/geolocation';
 import { usePostsStore } from '../../stores/posts';
@@ -17,6 +18,7 @@ export default {
   name: "LeafletMap",
   components: {
       Loader,
+      BackToCurrentPositionButton
   },
   setup() {
     return postStore
