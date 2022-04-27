@@ -77,10 +77,14 @@ export default {
     };
   },
   computed: {
-    loggedIn() {
-    }
   },
   created() {
+    UsersStore.$patch(
+      {
+        auth: null
+      }
+    )
+    console.log(UsersStore.auth)
   },
   methods: {
     async handleLogin(e) {

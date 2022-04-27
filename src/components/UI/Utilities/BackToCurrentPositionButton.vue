@@ -1,16 +1,16 @@
 <template>
-  <button @click="switchPosition(lat,long)">
-    <p class="w-3/4 inline-block">Go to Point</p>
-    <GeolocPinPicto class="w-4 inline-block"/>
+  <button @click="BackToUserPosition()" :disabled="userPositionActive===true">
+    <GeolocPinPicto class="w-full inline-block"/>
   </button>
 </template>
 
 <script>
 import { useGeolocationStore } from '../../../stores/geolocation';
 import GeolocPinPicto from '../../../assets/svg/GeolocPinPicto.vue'
+
 const geolocationStore = useGeolocationStore()
 export default {
-  name: 'SwitchPosition',
+  name: 'BackToCurrentPositionButton',
   props: {
     lat: {
       type: Number
@@ -24,21 +24,21 @@ export default {
   },
   data(){
     return{
-      position:null
+      position:null,
+      userPositionActive:geolocationStore.activeGeolocation
     }
   },
   mounted(){
     this.position
   },
   methods:{
-    async switchPosition(lat,long){
+    async BackToUserPosition(lat,long){
       geolocationStore.$patch({
         currentMarkerPosition:{
           latitude : lat,
           longitude : long,
-
         },
-        activeGeolocation:false,
+        activeGeolocation:true,
       })
     }
   }

@@ -15,13 +15,15 @@
             <span class="w-1/2">{{long}}</span>
           </div>
         </div>
+        <div class="px-6 pt-4 pb-2">
+          <span v-for="tag in tags" :key="tag.name" class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 mx-auto">{{tag}}</span>
+        </div>
+        <div class="flex">
+          <router-link  :to="'/Post/'+id"  class="block w-1/2 m-auto text-center bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mb-2 mx-auto">View Post</router-link>
+          <SwitchPosition class="block w-1/2 border m-auto text-center b-solid rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mb-2" :lat="lat" :long="long" />
+          </div>
+        </div>
       </div>
-      <div class="px-6 pt-4 pb-2">
-      <span v-for="tag in tags" :key="tag.name" class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{tag}}</span>
-      </div>
-      <router-link  :to="'/Post/'+id"  class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">View Post</router-link>
-      <SwitchPosition :lat="lat" :long="long" />
-    </div>
   </div>
 </template>
 

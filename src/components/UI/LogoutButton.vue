@@ -10,15 +10,11 @@ export default {
   name: 'PostList',
   props: {
   },
-  data(){
-    return{
-    }
-  },
   mounted(){
   },
   methods:{
     logout(){
-      this.$store.dispatch('auth/logout')
+      localStorage.removeItem('MemoryLaneCookie')
       this.$router.push('/login');
     }
   }

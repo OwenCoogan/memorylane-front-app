@@ -13,7 +13,7 @@ export const useGeolocationStore = defineStore({
   getters:{
   },
   actions:{
-    async getCurrentPosition(){
+    async initCurrentPosition(){
       return new Promise((resolve, reject) => {
         if (geolocation) {
           geolocation
@@ -34,6 +34,24 @@ export const useGeolocationStore = defineStore({
           console.info('Geolocation is not supported by this browser.');
           reject();
         }
+      });
+    },
+    async setCurrentPosition(){
+      return new Promise((resolve, reject) => {
+          geolocation
+            .getCurrentPosition(({ coords }) => {
+              const currentMarkerPosition = {
+                long: coords.longitude,
+                lat: coords.latitude,
+              };
+              this.currentMarkerPosition.latitude = coords.latitude,
+              this.currentMarkerPosition.longitude = coords.longitude,
+              this.activeGeolocation=true,
+              resolve(currentMarkerPosition);
+            },
+            (err) => {
+              reject(err);
+            });
       });
     },
   }

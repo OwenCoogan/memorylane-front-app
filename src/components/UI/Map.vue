@@ -38,7 +38,7 @@ export default {
   },
   async mounted() {
     this.posts = postStore.posts
-    await geolocationStore.getCurrentPosition()
+    await geolocationStore.initCurrentPosition()
     .then(this.mapLoaded = true)
     .then(coordinates => {
     localStorage.setItem('coordinates', JSON.stringify(coordinates));
@@ -49,7 +49,7 @@ export default {
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
     setInterval(function() {
-      geolocationStore.getCurrentPosition()
+      geolocationStore.setCurrentPosition()
     })
     }, 60 * 1000);
     geolocationStore.$subscribe((mutation) => {

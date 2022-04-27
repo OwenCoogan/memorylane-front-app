@@ -7,7 +7,6 @@ export const useUsersStore = defineStore({
     auth:{
       isAuthenticated:false,
       isRegistered:false,
-      email:'',
       user:{
         id:0,
         name:'',
