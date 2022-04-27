@@ -51,10 +51,8 @@ export const useUsersStore = defineStore({
     async checkUser(){
       const token = localStorage.getItem('MemoryLaneCookie');
       if(token){
-        console.log(token)
         await axios.post('http://localhost:6950/auth/check', {token})
         .then((res)=>{
-          console.log(res)
           this.auth.isAuthenticated = true;
           this.auth.token = res.data.data.token;
           this.auth.user = {

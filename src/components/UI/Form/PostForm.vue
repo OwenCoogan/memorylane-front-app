@@ -64,7 +64,7 @@ export default {
     }
   },
   mounted(){
-    let currentPosition = geolocationStore.currentPosition;
+    let currentPosition = geolocationStore.currentMarkerPosition;
     this.position = {
         gpsPositionLat:currentPosition.latitude,
         gpsPositionLong:currentPosition.longitude,
