@@ -10,7 +10,7 @@
           </div>
           <div class="w-full mb-4  max-w-4xl mx-auto">
             <div class="grid grid-cols-4 gap-4" v-if="post.images">
-              <img v-for="image in post.images" :src="`http://localhost:6950/resources/static/assets/uploads/post/${image.name}`"  v-bind:key="image.name" />
+              <img v-for="image in post.images" :src="`${meta.env.VITE_API_URL}/resources/static/assets/uploads/post/${image.name}`"  v-bind:key="image.name" />
             </div>
           <UploadImageForm :id="this.$route.params.id"  @updatedImageList="uploadedImage" />
           </div>

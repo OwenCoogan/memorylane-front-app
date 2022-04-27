@@ -1,7 +1,7 @@
 <template>
   <form
   class="mt-7"
-  :action="`${meta.env.API_URL}/v1/posts/upload/${post._id}`"
+  :action="`${meta.env.VITE_API_URL}/v1/posts/upload/${post._id}`"
   enctype="multipart/form-data"
   method="POST"
   @submit="submitImage"
@@ -40,7 +40,7 @@ export default {
         postId:this.id,
         userId:this.$store.state.user.id
       }
-      await axios.post(`http://${meta.env.API_URL}:6950/upload/post/${this.id}/comment/add/`, data)
+      await axios.post(`http://${meta.env.VITE_API_URL}:6950/upload/post/${this.id}/comment/add/`, data)
       .then(res => this.message = res.data)
       .catch(err => this.message = err.data)
     }

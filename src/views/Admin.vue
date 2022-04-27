@@ -3,7 +3,7 @@
     <div class="postlist">
       <li v-for="user in users" :key="user.name" class="grid grid-cols-4 gap-4">
         <div class="p-8 w-96 cursor-pointer rounded-3xl bg-gray-100 transition duration-300 ease-in-out hover:scale-105 hover:drop-shadow-2xl">
-          <img v-if="user.images[0]" :src="`http://localhost:6950/resources/static/assets/uploads/post/${user.images[0]?.name}`" alt="Kobe Bryant" title="Kobe Bryant" class="mx-auto" />
+          <img v-if="user.images[0]" :src="`${meta.env.VITE_API_URL}/resources/static/assets/uploads/post/${user.images[0]?.name}`" alt="Kobe Bryant" title="Kobe Bryant" class="mx-auto" />
         <div class="text-center">
           <h3 class="text-center text-4xl font-bold">{{user.name}}</h3>
           <span class="text-sm">{{user.email}}</span>
@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     async getUsers(){
-      await axios.get('http://localhost:6950/auth/users',{
+      await axios.get(`${meta.env.VITE_API_URL}/auth/users`,{
         token: token,
       })
       .then(response => {

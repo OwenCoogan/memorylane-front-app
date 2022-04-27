@@ -1,7 +1,7 @@
 <template>
   <form
   class="mt-7"
-  :action="'localhost:6950/v1/posts/upload/${post._id}'"
+  :action="`${meta.env.VITE_API_URL}:6950/v1/posts/upload/${post._id}`"
   enctype="multipart/form-data"
   method="POST"
   @submit="submitImage"
@@ -44,7 +44,7 @@ export default {
       e.preventDefault();
       const formData = new FormData();
       formData.append('file',this.image);
-      await axios.post(`http://localhost:6950/upload/post/${this.id}/image/add/`,formData)
+      await axios.post(`${meta.env.VITE_API_URL}/upload/post/${this.id}/image/add/`,formData)
       .then(res => {
         this.message = res.data;
         this.$emit('updatedImageList')

@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "npm install && vue-tsc --noEmit && vite build",
+    "build": "npm install && vue-tsc --noEmit && VITE_API_URL=http://209.97.189.215/  vite build",
     "preview": "vite preview"
   },
   "dependencies": {
