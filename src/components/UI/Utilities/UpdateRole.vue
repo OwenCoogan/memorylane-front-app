@@ -1,5 +1,5 @@
 <template>
-  <button @click="switchPosition(lat,long)">
+  <button>
     Update Role
   </button>
 </template>

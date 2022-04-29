@@ -21,7 +21,8 @@ export const useUsersStore = defineStore({
   },
   actions:{
     async login(payload:any){
-      const user:Object = await axios.post(`${process.env.VITE_API_URL}/auth/login`, payload)
+      console.log(import.meta.env.VITE_API_URL)
+      const user:Object = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, payload)
       .then((res)=>{
         this.auth.isAuthenticated = true;
         this.auth.user = {
@@ -37,7 +38,7 @@ export const useUsersStore = defineStore({
       })
     },
     async register(payload:any){
-      const registeredUser:Object = await axios.post(`${process.env.VITE_API_URL}/auth/register`, payload)
+      const registeredUser:Object = await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, payload)
       .then((res)=>{
         return registeredUser
       })
@@ -49,7 +50,8 @@ export const useUsersStore = defineStore({
       const token = localStorage.getItem('MemoryLaneCookie');
       if(token){
         if(this.auth.isAuthenticated === false){
-          await axios.post(`${import.meta.env.VITE_API_URL}/auth/check`, {token})
+          console.log(import.meta.env.VITE_API_URL)
+          await axios.post(import.meta.env.VITE_API_URL +'/auth/check', {token})
           .then((res)=>{
             this.auth.isAuthenticated = true;
             this.auth.user = {
