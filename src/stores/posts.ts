@@ -1,8 +1,6 @@
 import axios from 'axios'
 import { defineStore } from 'pinia'
-import { useGeolocationStore } from './geolocation'
 
-const geolocationStore = useGeolocationStore()
 export const usePostsStore = defineStore({
   id:'posts',
   state:()=>({
