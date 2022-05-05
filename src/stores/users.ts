@@ -12,11 +12,21 @@ export const useUsersStore = defineStore({
         name:'',
         email:'',
       }
+    },
+    profile:{
+      profile_image:'',
+      name:'',
+      email:'',
+      posts:[],
+      friends:[],
     }
   }),
   getters:{
     getAuth(state) {
       return state.auth
+    },
+    getProfile(state) {
+      return state.profile
     },
   },
   actions:{
@@ -52,6 +62,7 @@ export const useUsersStore = defineStore({
         if(this.auth.isAuthenticated === false){
           await axios.post(`${import.meta.env.VITE_API_URL}/auth/check`, {token})
           .then((res)=>{
+            console.log(res.data.data)
             this.auth.isAuthenticated = true;
             this.auth.user = {
               id:res.data.data.user.id,
