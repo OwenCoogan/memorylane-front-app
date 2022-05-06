@@ -42,7 +42,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '@/views/Register.vue')
   },
   {
-    path: '/profile',
+    path: '/profile/:id',
     name: 'Profile',
     meta: { requiresAuth: true },
     component: () => import(/* webpackChunkName: "about" */ '@/views/Profile.vue')

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Cipher } from 'crypto';
 import { defineStore } from 'pinia'
 
 export const useUsersStore = defineStore({
@@ -19,6 +20,9 @@ export const useUsersStore = defineStore({
       email:'',
       posts:[],
       friends:[],
+    },
+    viewedProfile:{
+
     }
   }),
   getters:{
@@ -27,6 +31,9 @@ export const useUsersStore = defineStore({
     },
     getProfile(state) {
       return state.profile
+    },
+    getViewedProfile(state){
+      return state.viewedProfile
     },
   },
   actions:{
@@ -56,23 +63,24 @@ export const useUsersStore = defineStore({
         return err
       })
     },
+
     async getUserProfile(payload:any){
-      const id = payload.id
-      const UserProfile:Object = await axios.post(`${import.meta.env.VITE_API_URL}/v1/user/${id}/`, payload)
+      await axios.get(`${import.meta.env.VITE_API_URL}/v1/user/${payload}/`)
       .then((res)=>{
-        return UserProfile
+        this.viewedProfile =  res.data.data
+        return this.viewedProfile
       })
       .catch((err)=>{
         return err
       })
     },
+
     async checkUser(){
       const token = localStorage.getItem('MemoryLaneCookie');
       if(token){
         if(this.auth.isAuthenticated === false){
           await axios.post(`${import.meta.env.VITE_API_URL}/auth/check`, {token})
           .then((res)=>{
-            console.log(res.data.data)
             this.auth.isAuthenticated = true;
             this.auth.user = {
               id:res.data.data.user.id,

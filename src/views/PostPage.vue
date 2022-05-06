@@ -2,21 +2,22 @@
   <div class="container pt-4 pb-12 m-auto">
         <Loader v-if="this.isLoading === true" />
         <div v-if="this.isLoading === false" class="max-w-xl m-auto">
-          <div class="flex flex-row mt-2 px-2 py-3 mx-3">
-            <div class="w-auto h-auto rounded-full border-2 border-pink-500">
-                <img class='w-12 h-12 object-cover rounded-full shadow cursor-pointer' alt='User avatar' :src='`
-                ${post.author.avatar ? post.author.avatar : "https://jsl-online.com/wp-content/uploads/2017/01/placeholder-user.png"}`'/>
+          <router-link :to='`/profile/${post.author.id}`'>
+            <div class="flex flex-row mt-2 px-2 py-3 mx-3">
+              <div class="w-auto h-auto rounded-full border-2 border-pink-500">
+                  <img class='w-12 h-12 object-cover rounded-full shadow cursor-pointer' alt='User avatar' :src='`
+                  ${post.author.avatar ? post.author.avatar : "https://jsl-online.com/wp-content/uploads/2017/01/placeholder-user.png"}`'/>
+              </div>
+              <div class="flex flex-col mb-2 ml-4 mt-1">
+                  <div class='text-gray-600 text-sm font-semibold'>{{post.author.name}}</div>
+                  <div class='flex w-full mt-1'>
+                      <div class='text-gray-400 font-thin text-xs'>
+                          {{post.createdAt}}
+                      </div>
+                  </div>
+              </div>
             </div>
-            <div class="flex flex-col mb-2 ml-4 mt-1">
-                <div class='text-gray-600 text-sm font-semibold'>{{post.author.name}}</div>
-                <div class='flex w-full mt-1'>
-                    <div class='text-gray-400 font-thin text-xs'>
-                        {{post.createdAt}}
-                    </div>
-                </div>
-            </div>
-          </div>
-
+          </router-link>
           <div class="border-b border-gray-100"></div>
 
           <h1 class="text-gray-600 font-semibold text-lg mb-2 mx-3 px-2" v-bind:post="post?.title">{{ post.title ? post.title : "Your Title"}}</h1>
@@ -108,7 +109,6 @@ export default {
         id:this.$route.params.id
       }).then(res=>{
         this.post = res.data
-        console.log(this.post)
         this.isLoading = false
       })
     }

@@ -25,7 +25,7 @@
             <div class="w-full lg:w-4/12 px-4 lg:order-1">
               <div class="flex justify-center py-4 lg:pt-4 pt-8">
                 <div class="mr-4 p-3 text-center">
-                  <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">10</span><span class="text-sm text-blueGray-400">Photos</span>
+                  <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">{{user.posts.length}}</span><span class="text-sm text-blueGray-400">Posts</span>
                 </div>
                 <div class="lg:mr-4 p-3 text-center">
                   <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">89</span><span class="text-sm text-blueGray-400">Comments</span>
@@ -75,16 +75,25 @@ export default {
   data() {
     return {
     user:{
-      id:UsersStore.getAuth.user.id,
-      name:UsersStore.getAuth.user.name,
-      email:UsersStore.getAuth.user.email,
+      id:'',
+      name:'',
+      email:'',
+      posts:[],
     }
     };
   },
   computed: {
   },
-  mounted() {
-    console.log(UsersStore.getAuth)
+  async mounted() {
+    await UsersStore.getUserProfile(this.$route.params.id)
+    .then(res =>{
+      this.user = {
+        id:UsersStore.getViewedProfile.id,
+        name:UsersStore.getViewedProfile.name,
+        email:UsersStore.getViewedProfile.email,
+        posts:UsersStore.getViewedProfile.posts,
+      }
+    })
   }
 };
 </script>
