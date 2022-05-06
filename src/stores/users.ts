@@ -56,6 +56,16 @@ export const useUsersStore = defineStore({
         return err
       })
     },
+    async getUserProfile(payload:any){
+      const id = payload.id
+      const UserProfile:Object = await axios.post(`${import.meta.env.VITE_API_URL}/v1/user/${id}/`, payload)
+      .then((res)=>{
+        return UserProfile
+      })
+      .catch((err)=>{
+        return err
+      })
+    },
     async checkUser(){
       const token = localStorage.getItem('MemoryLaneCookie');
       if(token){
