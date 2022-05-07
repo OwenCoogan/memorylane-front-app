@@ -13,7 +13,7 @@
   </section>
   <section v-if="isEditable === true">
     <EditUserForm
-      @updatedUser="this.getUserProfile"
+      @updatedUser="getUserProfile"
       :user="user"
     />
   </section>
@@ -33,7 +33,7 @@
                   <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">{{user.posts?.length}}</span><span class="text-sm text-blueGray-400">Posts</span>
                 </div>
                 <div class="lg:mr-4 p-3 text-center">
-                  <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">89</span><span class="text-sm text-blueGray-400">Comments</span>
+                  <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">{{user.comments?.length}}</span><span class="text-sm text-blueGray-400">Comments</span>
                 </div>
               </div>
             </div>
@@ -100,7 +100,8 @@ export default {
       description:'',
       email:'',
       posts:null,
-      isEditable:false
+      isEditable:false,
+      comments:null,
     }
     };
   },
@@ -121,6 +122,7 @@ export default {
         name:UsersStore.getViewedProfile.name,
         email:UsersStore.getViewedProfile.email,
         posts:UsersStore.getViewedProfile.posts,
+        comments:UsersStore.getViewedProfile.comments,
       }
       this.getUserType()
     })
