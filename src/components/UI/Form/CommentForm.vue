@@ -9,7 +9,7 @@
             </svg>
           </button>
       </span>
-        <input type="text" class="w-full py-2 pl-4 pr-10 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400 focus:bg-white focus:outline-none focus:border-blue-500 focus:text-gray-900 focus:shadow-outline-blueborder-radius: 25px" :v-model="this.content" placeholder="Post a comment..." autocomplete="off">
+        <input type="text" class="w-full py-2 pl-4 pr-10 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400 focus:bg-white focus:outline-none focus:border-blue-500 focus:text-gray-900 focus:shadow-outline-blueborder-radius: 25px" v-model="this.comment" placeholder="Post a comment..." autocomplete="off">
   </div>
   <p style="color:red" v-if="this.error !=null">{{this.error}}</p>
   <p style="color:green" v-if="this.message !=null">{{this.message}}</p>
@@ -22,11 +22,11 @@ export default {
   name: 'CommentForm',
   data(){
     return{
-      content:null,
+      comment:null,
+      author:usersStore.getAuth.user.id,
+      usersStore,
       message:null,
       error:null,
-      author:usersStore.getAuth.user.id,
-      usersStore
     }
   },
   props: {
@@ -41,11 +41,13 @@ export default {
   },
   methods:{
     async submitComment(){
+
       let data = {
-        comment:this.content,
+        comment:this.comment,
         postId:this.id,
         userId:this.author
       }
+      console.log(data)
       await axios.post(`http://localhost:6950/v1/post/${this.id}/comment/add/`, data)
       .then(res => this.message = "Comment added successfully",
         this.$emit('updatedCommentList'))

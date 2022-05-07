@@ -22,7 +22,7 @@ h1,h2,h3{
   margin:auto;
 }
 .post-list--container{
-  height:100vh;
+  height:100%;
   overflow:scroll;
 }
 .post-list--mobile{

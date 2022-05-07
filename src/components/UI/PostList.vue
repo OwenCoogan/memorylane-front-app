@@ -1,12 +1,17 @@
 <template>
-  <div class="w-1/3 post-list--container">
-    <div class="list-header">
-      <h2 class="text-xl text-center">Vos posts</h2>
-      <input type="range" style="width: 80%;
+  <div class="w-1/3 h-screen">
+  <div class="list-header w-1-3 ">
+    <h2 class="text-xl text-center my-6">Vos posts</h2>
+    <input type="range" style="width: 80%;
     margin: auto;
     display: block;" min="1" max="100" class="w-full h-2 bg-blue-100 appearance-none" v-model="range" @change="this.getPosts(this.range)">
-    </div>
-    <div class="postlist">
+    <CreatePostForm v-if="this.formPostCreateShown === true "/>
+    <button @click="toggleForm()" class="my-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 block m-auto">
+    <p v-if="this.formPostCreateShown === false">Create a Post</p>
+    <p v-else >X</p>
+    </button>
+  </div>
+    <div class="postlist post-list--container">
       <li v-for="post in posts" :key="post.title">
         <PostCard
         :title="post.title"
@@ -16,15 +21,10 @@
         :tags="post.tags"
         :lat="post.latitude"
         :long="post.longitude"
+        :author="post.author"
         />
       </li>
     </div>
-    <CreatePostForm v-if="this.formPostCreateShown === true "/>
-    <button @click="toggleForm()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 block m-auto">
-    <p v-if="this.formPostCreateShown === false">Create a Post</p>
-    <p v-else >X</p>
-
-    </button>
   </div>
 </template>
 <script>
@@ -62,7 +62,9 @@ export default {
     async getPosts(req,res){
       await postStore.getPosts(this.range)
       .then(this.posts = postStore.posts)
-      .then(this.loading = false)
+      .then(this.loading = false,
+
+    console.log(this.posts))
     },
   }
 }

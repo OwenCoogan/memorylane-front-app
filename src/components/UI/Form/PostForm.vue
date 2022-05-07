@@ -73,7 +73,7 @@ export default {
   methods:{
     async handleSubmitPost(){
       this.loading = true;
-      axios.post(`${meta.env.VITE_API_URL}/v1/post/create`, {
+      axios.post(`${import.meta.env.VITE_API_URL}/v1/post/create`, {
           title:this.title,
           content:this.content,
           latitude:this.position.gpsPositionLat,

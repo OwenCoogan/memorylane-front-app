@@ -1,5 +1,4 @@
 <template>
-  <main class="profile-page">
   <section class="relative block h-500-px">
     <div class="absolute top-0 w-full h-full bg-center bg-cover" style="
             background-image: url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2710&amp;q=80');
@@ -12,9 +11,9 @@
       </svg>
     </div>
   </section>
-  <section class="relative py-16 bg-blueGray-200">
+  <section class="relative bg-blueGray-200">
     <div class="container mx-auto px-4">
-      <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
+      <div class=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
         <div class="px-6">
           <div class="flex flex-wrap justify-center">
             <div class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
@@ -34,6 +33,7 @@
             </div>
           </div>
           <div class="text-center mt-12">
+            <img class="inline object-cover w-16 h-16 mr-2 rounded-full" :src="user.profileImage? user.profileImage :'https://jsl-online.com/wp-content/uploads/2017/01/placeholder-user.png'" alt="Profile image"/>
             <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
               {{user.name}}
             </h3>
@@ -49,6 +49,21 @@
           <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
             <div class="flex flex-wrap justify-center">
               <div class="w-full lg:w-9/12 px-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-x-10 xl-grid-cols-4 gap-y-10 gap-x-6 ">
+                  <li  v-for="post in this.user.posts" :key="post">
+                    {{post}}
+                  <Postcard
+                  :title="post.title"
+                  :id="post.id"
+                  :img="post.images"
+                  :description="post.content"
+                  :tags="post.tags"
+                  :lat="post.latitude"
+                  :long="post.longitude"
+                  :author="post.author"
+                  />
+                  </li>
+                </div>
                 <p class="mb-4 text-lg leading-relaxed text-blueGray-700">
                   An artist of considerable range, Jenna the name taken by
                   Melbourne-raised, Brooklyn-based Nick Murphy writes,
@@ -56,7 +71,7 @@
                   warm, intimate feel with a solid groove structure. An
                   artist of considerable range.
                 </p>
-                <a href="#pablo" class="font-normal text-pink-500">Show more</a>
+
               </div>
             </div>
           </div>
@@ -64,19 +79,25 @@
       </div>
     </div>
   </section>
-</main>
+
+
 </template>
 
 <script>
 import { useUsersStore } from '../stores/users'
+import PostCard from '../components/UI/PostCard.vue'
 const UsersStore = useUsersStore()
 export default {
   name: 'Profile',
+  components(){
+    PostCard
+  },
   data() {
     return {
     user:{
       id:'',
       name:'',
+      profileImage:'',
       email:'',
       posts:[],
     }
@@ -89,10 +110,12 @@ export default {
     .then(res =>{
       this.user = {
         id:UsersStore.getViewedProfile.id,
+        profileImage: UsersStore.getViewedProfile.images ? UsersStore.getViewedProfile.images[0].url : '',
         name:UsersStore.getViewedProfile.name,
         email:UsersStore.getViewedProfile.email,
         posts:UsersStore.getViewedProfile.posts,
       }
+      console.log(this.user.posts)
     })
   }
 };
