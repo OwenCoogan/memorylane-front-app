@@ -12,7 +12,7 @@
                   <div class='text-gray-600 text-sm font-semibold'>{{post.author.name}}</div>
                   <div class='flex w-full mt-1'>
                       <div class='text-gray-400 font-thin text-xs'>
-                          {{post.createdAt}}
+                          {{this.formatDate(post.createdAt)}}
                       </div>
                   </div>
               </div>
@@ -33,23 +33,31 @@
             <div class="grid grid-cols-4 gap-4" v-if="post.images">
               <img v-for="image in post.images" :src="`http://localhost:6950/resources/static/assets/uploads/post/${image.name}`"  v-bind:key="image.name" />
             </div>
-
             <div class="border-b border-gray-100"></div>
             <h2>Comments</h2>
             <div class="comment-list">
-              <div class="comment" v-for="comment in post.comments" v-bind:key="comment.content">
-                <li class="flex">
-                <img
-                 :src='`${comment.author.images ? comment.author.images[0] : "https://jsl-online.com/wp-content/uploads/2017/01/placeholder-user.png"}`'
-                 alt="comment-avatar"
-                 width="48" height="48" class="comment-avatar rounded-full w-10 h-10 mr-4 shadow-lg mb-4"
-                 >
-                <div class="comment-body">
-                  <div class="comment-author text-teal-600 font-semibold text-lg text-center md:text-left"><p>{{comment.author.name}}</p></div>
-                  <div class="comment-content text-gray-600 text-lg text-center md:text-left "><p>{{comment.comment}}</p></div>
-                  <div class="comment-date"><p>{{comment.createdAt}}</p></div>
+              <div class="my-2 max-w-lg flex gap-3 rounded-md bg-white p-2 text-black shadow" v-for="comment in post.comments" v-bind:key="comment.content">
+              <!-- Photo -->
+              <div class="mt-2">
+                <img class="w-10 rounded-full shadow" :src='`${comment.author.images ? comment.author.images[0] : "https://jsl-online.com/wp-content/uploads/2017/01/placeholder-user.png"}`' alt="" srcset="" />
+              </div>
+              <!-- Content -->
+              <div>
+                <!-- Header -->
+                <div class="flex items-center justify-between py-1 pr-2">
+                  <!-- Author -->
+                  <div>
+                    <a href="#" class="text-teal-400 hover:underline">{{comment.author.name}}</a>
+                    <span class="text-sm font-thin text-gray-500"> {{this.formatDate(comment.createdAt)}}</span>
+                  </div>
                 </div>
-                </li>
+                <!-- Context -->
+                <div class="p-1">
+                  <p class="text-gray-900 border-l-2 px-1 border-teal-500 bg-gray-100 rounded">{{comment.comment}}</p>
+                </div>
+              </div>
+            </div>
+              <div class="comment" >
               </div>
             </div>
 
@@ -71,6 +79,7 @@
 import Loader from '@/assets/svg/Loader.vue'
 import UploadImageForm from '@/components/UI/Form/UploadImageForm.vue'
 import CommentForm from '@/components/UI/Form/CommentForm.vue'
+import { formatDate } from '../utilities/formatDate'
 import { usePostsStore } from '../stores/posts'
 
 const postStore = usePostsStore()
@@ -110,6 +119,9 @@ export default {
         this.post = res.data
         this.isLoading = false
       })
+    },
+    formatDate(date){
+      return formatDate(date)
     }
   }
 }

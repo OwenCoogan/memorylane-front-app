@@ -12,8 +12,10 @@
     "dotenv": "^16.0.0",
     "firebase-tools": "^10.7.1",
     "leaflet": "^1.7.1",
+    "moment": "^2.29.3",
     "pinia": "^2.0.13",
     "vue": "^3.2.25",
+    "vue-moment": "^4.1.0",
     "vue-router": "^4.0.14"
   },
   "devDependencies": {
