@@ -49,20 +49,20 @@
           <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
             <div class="flex flex-wrap justify-center">
               <div class="w-full lg:w-9/12 px-4">
-                <div v-if="this.user.posts" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-x-10 xl-grid-cols-4 gap-y-10 gap-x-6 ">
+                <ul v-if="this.user.posts" class=" list-none grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-x-10 xl-grid-cols-4 gap-y-10 gap-x-6 ">
                   <li  v-for="post in this.user.posts" :key="post">
-                  <PostCard
-                  :title="post.title"
-                  :id="post.id"
-                  :img="post.images"
-                  :description="post.content"
-                  :tags="post.tags"
-                  :lat="post.latitude"
-                  :long="post.longitude"
-                  :author="this.user"
-                  />
-                  </li>
-                </div>
+                    <PostCard
+                    :title="post.title"
+                    :id="post.id"
+                    :img="post.images"
+                    :description="post.content"
+                    :tags="post.tags"
+                    :lat="post.latitude"
+                    :long="post.longitude"
+                    :author="this.user"
+                    />
+                    </li>
+                </ul>
                 <p class="mb-4 text-lg leading-relaxed text-blueGray-700">
                   An artist of considerable range, Jenna the name taken by
                   Melbourne-raised, Brooklyn-based Nick Murphy writes,
@@ -114,7 +114,6 @@ export default {
         email:UsersStore.getViewedProfile.email,
         posts:UsersStore.getViewedProfile.posts,
       }
-      console.log(this.user.posts)
     })
   }
 };

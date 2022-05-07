@@ -5,13 +5,16 @@
     <input type="range" style="width: 80%;
     margin: auto;
     display: block;" min="1" max="100" class="w-full h-2 bg-teal-100 appearance-none" v-model="range" @change="this.getPosts(this.range)">
-    <CreatePostForm v-if="this.formPostCreateShown === true "/>
-    <button @click="toggleForm()" class="my-6 text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-teal-600 dark:hover:bg-teal-700 focus:outline-none dark:focus:ring-teal-800 block m-auto">
-    <p v-if="this.formPostCreateShown === false">Create a Post</p>
-    <p v-else >X</p>
-    </button>
+    <div class="flex">
+      <BackToCurrentPositionButton class=" text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-teal-600 dark:hover:bg-teal-700 focus:outline-none dark:focus:ring-teal-800 block m-auto" style="z-index:9999"/>
+      <CreatePostForm v-if="this.formPostCreateShown === true "/>
+      <button @click="toggleForm()" class="my-6 text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-teal-600 dark:hover:bg-teal-700 focus:outline-none dark:focus:ring-teal-800 block m-auto">
+      <p v-if="this.formPostCreateShown === false">Create a Post</p>
+      <p v-else >X</p>
+      </button>
+    </div>
   </div>
-    <div class="postlist post-list--container">
+    <ul class="postlist post-list--container">
       <li v-for="post in posts" :key="post.title">
         <PostCard
         :title="post.title"
@@ -24,12 +27,13 @@
         :author="post.author"
         />
       </li>
-    </div>
+    </ul>
   </div>
 </template>
 <script>
 import PostCard from '@/components/UI/PostCard.vue'
 import CreatePostForm from '@/components/UI/Form/PostForm.vue'
+import BackToCurrentPositionButton from '@/components/UI/Utilities/BackToCurrentPositionButton.vue';
 import { useGeolocationStore } from '../../stores/geolocation';
 import { usePostsStore } from '../../stores/posts'
 const postStore = usePostsStore()
@@ -40,7 +44,8 @@ export default {
   },
   components:{
     PostCard,
-    CreatePostForm
+    CreatePostForm,
+    BackToCurrentPositionButton
   },
   data(){
     return{

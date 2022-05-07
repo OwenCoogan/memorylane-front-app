@@ -39,15 +39,16 @@ export default {
 
 
   },
+  mounted(){
+    this.error = this.author
+  },
   methods:{
     async submitComment(){
-
       let data = {
         comment:this.comment,
         postId:this.id,
         userId:this.author
       }
-      console.log(data)
       await axios.post(`http://localhost:6950/v1/post/${this.id}/comment/add/`, data)
       .then(res => this.message = "Comment added successfully",
         this.$emit('updatedCommentList'))

@@ -40,7 +40,6 @@ export const useUsersStore = defineStore({
     async login(payload:any){
       const user:Object = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, payload)
       .then((res)=>{
-        console.log(res)
         this.auth.isAuthenticated = true;
         this.auth.user = {
           id:res.data.data.id,

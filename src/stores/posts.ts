@@ -10,7 +10,6 @@ export const usePostsStore = defineStore({
   },
   actions:{
     async getPosts(req:any){
-      console.log(req?.body)
       const posts = await axios.get(`${import.meta.env.VITE_API_URL}/v1/posts`,{
         data:{
           ...req?.body,

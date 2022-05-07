@@ -1,6 +1,7 @@
 <template>
-  <button class="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded-full" @click="BackToUserPosition()" :disabled="userPositionActive===true">
-    <GeolocPinPicto class="w-full inline-block"/>
+  <button class="bg-teal-500 hover:bg-teal-700 text-white font-bold flex" @click="BackToUserPosition()" :disabled="userPositionActive===true">
+    <p class="px-3">Current Position</p>
+    <GeolocPinPicto class="w-6 inline-block"/>
   </button>
 </template>
 
