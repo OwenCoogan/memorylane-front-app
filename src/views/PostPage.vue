@@ -99,6 +99,7 @@ export default {
       id:this.$route.params.id
     }).then(res=>{
       this.post = res.data
+      console.log(this.post)
       this.isLoading = false
     })
   },

@@ -43,7 +43,8 @@ import axios from 'axios'
 import Loader from '@/assets/svg/Loader.vue'
 import { useGeolocationStore } from '../../../stores/geolocation';
 const geolocationStore = useGeolocationStore()
-
+import { useUsersStore } from '../../../stores/users';
+const UsersStore = useUsersStore()
 export default {
   name: 'CreatePostForm',
   props: {
@@ -76,6 +77,7 @@ export default {
       axios.post(`${import.meta.env.VITE_API_URL}/v1/post/create`, {
           title:this.title,
           content:this.content,
+          userId:UsersStore.getAuth.user.id,
           latitude:this.position.gpsPositionLat,
           longitude:this.position.gpsPositionLong,
       })
