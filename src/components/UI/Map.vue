@@ -23,6 +23,7 @@ export default {
   data() {
     return {
         map: null,
+        currentPosition: null,
         mapLoaded:false,
         posts: null,
     };
@@ -37,20 +38,25 @@ export default {
   },
   async mounted() {
     this.posts = postStore.posts
-    await geolocationStore.initCurrentPosition()
-    .then(this.mapLoaded = true)
-    .then(coordinates => {
-    localStorage.setItem('coordinates', JSON.stringify(coordinates));
-    this.map = L.map("mapContainer").setView([coordinates.lat,coordinates.long], 200);
-    this.setCurrentPositionMarker(coordinates);
-    L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
-      attribution:
-        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(this.map);
-    setInterval(function() {
-      geolocationStore.setCurrentPosition()
-    })
-    }, 60 * 1000);
+    if(geolocationStore.currentLocationMarker){
+      this.setCurrentPositionMarker(geolocationStore.currentLocationMarker)
+    }
+    else{
+      await geolocationStore.initCurrentPosition()
+      .then(this.mapLoaded = true)
+      .then(coordinates => {
+      localStorage.setItem('coordinates', JSON.stringify(coordinates));
+      this.map = L.map("mapContainer").setView([coordinates.lat,coordinates.long], 200);
+      this.setCurrentPositionMarker(coordinates);
+      L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+        attribution:
+          '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(this.map);
+      setInterval(function() {
+        geolocationStore.setCurrentPosition()
+      })
+      }, 60 * 1000);
+    }
     geolocationStore.$subscribe((mutation) => {
         if(geolocationStore.activeGeolocation === false){
         this.map.setView([mutation.payload.currentMarkerPosition.latitude,mutation.payload.currentMarkerPosition.longitude], 200);

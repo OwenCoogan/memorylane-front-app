@@ -11,36 +11,22 @@
       </svg>
     </div>
   </section>
-  <section v-if="isEditable === true">
-    <EditUserForm
-      @updatedUser="getUserProfile"
-      :user="user"
-    />
-  </section>
   <section class="relative bg-blueGray-200">
     <div class="container mx-auto px-4">
       <div class=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
         <div class="px-6">
           <div class="flex flex-wrap justify-center">
-            <div class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
-              <div class="relative">
-                <img alt="..." src="https://demos.creative-tim.com/notus-js/assets/img/team-2-800x800.jpg" class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px">
-              </div>
-            </div>
-            <div class="w-full lg:w-4/12 px-4 lg:order-1">
-              <div class="flex justify-center py-4 lg:pt-4 pt-8">
-                <div class="mr-4 p-3 text-center">
-                  <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">{{user.posts?.length}}</span><span class="text-sm text-blueGray-400">Posts</span>
-                </div>
-                <div class="lg:mr-4 p-3 text-center">
-                  <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">{{user.comments?.length}}</span><span class="text-sm text-blueGray-400">Comments</span>
-                </div>
-              </div>
-            </div>
           </div>
           <div class="text-center mt-12">
-            <img class="inline object-cover w-16 h-16 mr-2 rounded-full" :src="user.profileImage? user.profileImage :'https://jsl-online.com/wp-content/uploads/2017/01/placeholder-user.png'" alt="Profile image"/>
-            <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
+            <div class="flex w-1/4 m-auto">
+               <img class="inline object-cover w-64 h-64 mr-2 rounded-full" :src="user.profileImage? user.profileImage :'https://jsl-online.com/wp-content/uploads/2017/01/placeholder-user.png'" alt="Profile image"/>
+              <ImageUploadForm
+              :route="`http://localhost:6950/upload/user/${user.id}/profile/picture`"
+              @updatedImageList="getuserProfile"
+              />
+            </div>
+
+            <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700">
               {{user.name}}
             </h3>
             <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
@@ -51,6 +37,26 @@
               <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
               Email : {{user.email}}
             </div>
+             <div class="flex justify-between px-10 py-5 w-1/4 m-auto">
+                <div class="text-center">
+                    <p class="font-bold">{{user.posts?.length}}</p>
+                    <p class="text-xs">Posts</p>
+
+                </div>
+                <div class="text-center">
+                    <p class="font-bold">{{user.comments?.length}}</p>
+                    <p class="text-xs">Comments</p>
+                </div>
+                <button v-if="isEditable === true" @click="toggleForm()" class="bg-teal-500">
+                  <p>Edit Profile</p>
+                </button>
+            </div>
+            <section v-if="isEditable === true && formToggled === true">
+              <EditUserForm
+                @updatedUser="getUserProfile"
+                :user="user"
+              />
+            </section>
           </div>
           <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
             <div class="flex flex-wrap justify-center">
@@ -84,12 +90,14 @@
 import { useUsersStore } from '../stores/users'
 import PostCard from '../components/UI/PostCard.vue'
 import EditUserForm from '../components/UI/Form/EditUserForm.vue'
+import ImageUploadForm from '../components/UI/Form/UploadImageForm.vue'
 const UsersStore = useUsersStore()
 export default {
   name: 'Profile',
   components:{
     PostCard,
-    EditUserForm
+    EditUserForm,
+    ImageUploadForm
   },
   data() {
     return {
@@ -100,7 +108,9 @@ export default {
       description:'',
       email:'',
       posts:null,
+      imageFormToggled:false,
       isEditable:false,
+      formToggled:false,
       comments:null,
     }
     };
@@ -126,6 +136,10 @@ export default {
       }
       this.getUserType()
     })
+    },
+    toggleForm(){
+      this.formToggled = !this.formToggled
+      console.log(this.formToggled)
     }
   },
   computed: {

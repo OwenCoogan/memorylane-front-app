@@ -40,6 +40,14 @@ export default {
     id: {
       type: String,
       required: true
+    },
+    route:{
+      type: String,
+      required: true
+    },
+    message:{
+      type: String,
+      required: false
     }
   },
   components:{
@@ -61,15 +69,14 @@ export default {
     async submitImage(e){
       e.preventDefault();
       const formData = new FormData();
+      console.log(this.route)
       formData.append('file',this.image);
-      await axios.post(`http://localhost:6950/upload/post/${this.id}/image/add/`,formData)
+      await axios.post(this.route,formData)
       .then(res => {
         this.message = res.data;
         this.submittedImageName = null
         this.$emit('updatedImageList')
-      }
-
-      )
+      })
       .catch(err => this.message = err.data)
     }
   }

@@ -61,7 +61,7 @@
 
           <div class="border-b border-gray-100"></div>
           <h2>Upload Image Form</h2>
-          <UploadImageForm :id="this.$route.params.id"  @updatedImageList="getPost" />
+          <UploadImageForm :id="this.$route.params.id" :route="`http://localhost:6950/upload/post/${this.$route.params.id}/image/add/`"  @updatedImageList="getPost" />
           </div>
         </div>
       </div>
@@ -99,7 +99,6 @@ export default {
       id:this.$route.params.id
     }).then(res=>{
       this.post = res.data
-      console.log(this.post)
       this.isLoading = false
     })
   },
