@@ -44,12 +44,12 @@
         </div>
         <div class="flex items-center justify-between">
           <button
-            class="bg-blue-600 hover:bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            class="bg-teal-600 hover:bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
             Sign In
           </button>
-          <router-link to="/register" class="bg-red-600 hover:bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">New User ?</router-link>
+          <router-link to="/register" class="border border-transparent text-base font-medium rounded-md text-teal-700 bg-teal-100 hover:bg-teal-200 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">New User ?</router-link>
         </div>
         <router-link to="/login" class="w-full block my-3 underline">
             Forgot Password?

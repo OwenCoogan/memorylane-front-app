@@ -57,13 +57,13 @@
 
         <div class="flex items-center justify-between">
           <button
-            class="bg-blue-600 hover:bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            class="bg-teal-600 hover:bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
             Register
           </button>
           <a
-            class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+            class="inline-block align-baseline font-bold text-sm text-teal-500 hover:text-teal-800"
             href="#"
           >
             Forgot Password?

@@ -4,7 +4,7 @@
         <div v-if="this.isLoading === false" class="max-w-xl m-auto">
           <router-link :to='`/profile/${post.author.id}`'>
             <div class="flex flex-row mt-2 px-2 py-3 mx-3">
-              <div class="w-auto h-auto rounded-full border-2 border-pink-500">
+              <div class="w-auto h-auto rounded-full border-2 border-teal-500">
                   <img class='w-12 h-12 object-cover rounded-full shadow cursor-pointer' alt='User avatar' :src='`
                   ${post.author.avatar ? post.author.avatar : "https://jsl-online.com/wp-content/uploads/2017/01/placeholder-user.png"}`'/>
               </div>
@@ -45,7 +45,7 @@
                  width="48" height="48" class="comment-avatar rounded-full w-10 h-10 mr-4 shadow-lg mb-4"
                  >
                 <div class="comment-body">
-                  <div class="comment-author text-purple-600 font-semibold text-lg text-center md:text-left"><p>{{comment.author.name}}</p></div>
+                  <div class="comment-author text-teal-600 font-semibold text-lg text-center md:text-left"><p>{{comment.author.name}}</p></div>
                   <div class="comment-content text-gray-600 text-lg text-center md:text-left "><p>{{comment.comment}}</p></div>
                   <div class="comment-date"><p>{{comment.createdAt}}</p></div>
                 </div>

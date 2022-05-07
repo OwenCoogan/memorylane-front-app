@@ -4,12 +4,6 @@
     <div class="max-w-sm rounded overflow-hidden shadow-lg m-auto">
       <img class="w-full" v-if="img[0]" :src="`http://0.0.0.0:6950/resources/static/assets/uploads/post/${img[0].name}`" :alt="img[0].name">
       <div class="px-6 py-4">
-          <router-link :to="'/Profile/'+author.id"  class="flex items-center no-underline hover:underline text-black">
-            <img class="inline object-cover w-8 h-8 mr-2 rounded-full" :src="author.images? user.profileImage :'https://jsl-online.com/wp-content/uploads/2017/01/placeholder-user.png'" alt="Profile image"/>
-            <p class="ml-2 text-sm">
-                {{author.name}}
-            </p>
-        </router-link>
         <div class="font-bold text-xl mb-2">{{ title }}</div>
         <p class="text-gray-700 text-base">
         {{description}}

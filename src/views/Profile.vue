@@ -24,7 +24,7 @@
             <div class="w-full lg:w-4/12 px-4 lg:order-1">
               <div class="flex justify-center py-4 lg:pt-4 pt-8">
                 <div class="mr-4 p-3 text-center">
-                  <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">{{user.posts.length}}</span><span class="text-sm text-blueGray-400">Posts</span>
+                  <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">{{user.posts?.length}}</span><span class="text-sm text-blueGray-400">Posts</span>
                 </div>
                 <div class="lg:mr-4 p-3 text-center">
                   <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">89</span><span class="text-sm text-blueGray-400">Comments</span>
@@ -49,10 +49,9 @@
           <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
             <div class="flex flex-wrap justify-center">
               <div class="w-full lg:w-9/12 px-4">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-x-10 xl-grid-cols-4 gap-y-10 gap-x-6 ">
+                <div v-if="this.user.posts" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-x-10 xl-grid-cols-4 gap-y-10 gap-x-6 ">
                   <li  v-for="post in this.user.posts" :key="post">
-                    {{post}}
-                  <Postcard
+                  <PostCard
                   :title="post.title"
                   :id="post.id"
                   :img="post.images"
@@ -60,7 +59,7 @@
                   :tags="post.tags"
                   :lat="post.latitude"
                   :long="post.longitude"
-                  :author="post.author"
+                  :author="this.user"
                   />
                   </li>
                 </div>
@@ -89,7 +88,7 @@ import PostCard from '../components/UI/PostCard.vue'
 const UsersStore = useUsersStore()
 export default {
   name: 'Profile',
-  components(){
+  components:{
     PostCard
   },
   data() {
@@ -99,7 +98,7 @@ export default {
       name:'',
       profileImage:'',
       email:'',
-      posts:[],
+      posts:null,
     }
     };
   },

@@ -3,7 +3,7 @@
   <div class="m-4">
     <label class="inline-block mb-2 text-gray-500">File Upload</label>
     <div class="flex items-center justify-center w-full">
-      <label class="flex flex-col w-full h-32 border-4 border-blue-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
+      <label class="flex flex-col w-full h-32 border-4 border-teal-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
           <div class="flex flex-col items-center justify-center pt-7">
             <form
             class="mt-7"
@@ -19,7 +19,7 @@
               <input type="file" hidden class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600" name="myImage" accept="image/*" @change="this.onFilePicked"/>
             </form>
             <p class="" v-if="this.submittedImageName">{{this.submittedImageName}}</p>
-            <button class="w-full px-4 py-2 text-white bg-blue-500 rounded shadow-xl" @click="submitImage">Send Photo</button>
+            <button class="w-full px-4 py-2 text-white bg-teal-500 rounded shadow-xl mt-14" @click="submitImage">Send Photo</button>
             <p style="color:red" v-if="this.message !=null">{{this.message}}</p>
           </div>
       </label>

@@ -27,7 +27,7 @@
         <input class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="desc" type="textarea" v-model="this.position.gpsPositionLong">
       </div>
     </div>
-    <button type="submit" class="bg-indigo-500">
+    <button type="submit" class="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded">
     <Loader v-if="this.loading === true"/>
       <div v-if="this.loading ===false">
         <p v-if="this.message!=null">{this.message}</p>
