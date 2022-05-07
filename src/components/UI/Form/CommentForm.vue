@@ -40,7 +40,6 @@ export default {
 
   },
   mounted(){
-    this.error = this.author
   },
   methods:{
     async submitComment(){

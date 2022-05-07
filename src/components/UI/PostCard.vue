@@ -1,5 +1,5 @@
 <template>
-  <div class="p-10">
+  <div class="p-6">
     <!--Card 1-->
     <div class="max-w-sm rounded overflow-hidden shadow-lg m-auto">
       <img class="w-full" v-if="img[0]" :src="`http://0.0.0.0:6950/resources/static/assets/uploads/post/${img[0].name}`" :alt="img[0].name">

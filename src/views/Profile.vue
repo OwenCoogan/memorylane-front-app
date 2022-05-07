@@ -11,6 +11,12 @@
       </svg>
     </div>
   </section>
+  <section v-if="isEditable === true">
+    <EditUserForm
+      @updatedUser="this.getUserProfile"
+      :user="user"
+    />
+  </section>
   <section class="relative bg-blueGray-200">
     <div class="container mx-auto px-4">
       <div class=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
@@ -39,7 +45,7 @@
             </h3>
             <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
               <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-              Los Angeles, California
+              {{user.description}}
             </div>
             <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
               <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
@@ -63,14 +69,6 @@
                     />
                     </li>
                 </ul>
-                <p class="mb-4 text-lg leading-relaxed text-blueGray-700">
-                  An artist of considerable range, Jenna the name taken by
-                  Melbourne-raised, Brooklyn-based Nick Murphy writes,
-                  performs and records all of his own music, giving it a
-                  warm, intimate feel with a solid groove structure. An
-                  artist of considerable range.
-                </p>
-
               </div>
             </div>
           </div>
@@ -85,11 +83,13 @@
 <script>
 import { useUsersStore } from '../stores/users'
 import PostCard from '../components/UI/PostCard.vue'
+import EditUserForm from '../components/UI/Form/EditUserForm.vue'
 const UsersStore = useUsersStore()
 export default {
   name: 'Profile',
   components:{
-    PostCard
+    PostCard,
+    EditUserForm
   },
   data() {
     return {
@@ -97,24 +97,39 @@ export default {
       id:'',
       name:'',
       profileImage:'',
+      description:'',
       email:'',
       posts:null,
+      isEditable:false
     }
     };
   },
-  computed: {
-  },
-  async mounted() {
-    await UsersStore.getUserProfile(this.$route.params.id)
+  methods:{
+    getUserType(){
+      if( UsersStore.getAuth.user.id === this.user.id ){
+        this.isEditable = true
+        console.log(this.isEditable)
+      }
+    },
+    async getUserProfile(){
+      await UsersStore.getUserProfile(this.$route.params.id)
     .then(res =>{
       this.user = {
         id:UsersStore.getViewedProfile.id,
+        description:UsersStore.getViewedProfile.description,
         profileImage: UsersStore.getViewedProfile.images ? UsersStore.getViewedProfile.images[0].url : '',
         name:UsersStore.getViewedProfile.name,
         email:UsersStore.getViewedProfile.email,
         posts:UsersStore.getViewedProfile.posts,
       }
+      this.getUserType()
     })
+    }
+  },
+  computed: {
+  },
+  mounted() {
+    this.getUserProfile()
   }
 };
 </script>

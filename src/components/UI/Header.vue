@@ -19,6 +19,7 @@
         </router-link>
       </div>
 
+      <ProfileButton/>
       <logout-button class=" inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"/>
     </div>
 </nav>
@@ -26,12 +27,15 @@
 
 <script>
 import LogoutButton from './LogoutButton.vue'
+import ProfileButton from '../UI/Utilities/ProfileButton.vue'
 export default {
   name: 'Header',
   props: {
   },
   components:{
-    LogoutButton
+    LogoutButton,
+    ProfileButton
+
 
   },
   data(){
