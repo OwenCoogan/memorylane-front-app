@@ -11,8 +11,8 @@
       </span>
         <input type="text" class="w-full py-2 pl-4 pr-10 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400 focus:bg-white dark:bg-slate-900 focus:outline-none focus:border-teal-500 focus:text-gray-900 focus:shadow-outline-blueborder-radius: 25px" v-model="this.comment" placeholder="Post a comment..." autocomplete="off">
   </div>
-  <SuccessMessage v-if="this.error ===null && this.message !=null" :message="this.message" />
-  <ErrorMessage v-if="this.message ===null && this.error !=null" :message="this.error" />
+  <SuccessMessage class="m-t-2" v-if="this.error ===null && this.message !=null" :message="this.message" />
+  <ErrorMessage class="m-t-2" v-if="this.message ===null && this.error !=null" :message="this.error" />
 </template>
 <script>
 import axios from 'axios'

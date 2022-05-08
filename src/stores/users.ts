@@ -73,10 +73,27 @@ export const useUsersStore = defineStore({
       })
     },
     async addFriend(payload:any){
-      await axios.get(`${import.meta.env.VITE_API_URL}/v1/user/${payload}/`)
+      await axios.put(`${import.meta.env.VITE_API_URL}/user/${payload?.requesteeUserId}/friendRequest`, payload)
       .then((res)=>{
-        this.viewedProfile =  res.data.data
-        return this.viewedProfile
+        console.log(res)
+      })
+      .catch((err)=>{
+        return err
+      })
+    },
+    async acceptFriendRequest(payload:any){
+      await axios.put(`${import.meta.env.VITE_API_URL}/user/${payload?.requesteeUserId}/friendRequest/accept`, payload)
+      .then((res)=>{
+        console.log(res)
+      })
+      .catch((err)=>{
+        return err
+      })
+    },
+    async refuseFriendRequest(payload:any){
+      await axios.put(`${import.meta.env.VITE_API_URL}/user/${payload?.requesteeUserId}/friendRequest/refuse`, payload)
+      .then((res)=>{
+        console.log(res)
       })
       .catch((err)=>{
         return err
