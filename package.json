@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "npm install && vue-tsc --noEmit && VITE_API_URL=https://api.owensapi.com  vite build",
+    "build": "npm install && vue-tsc --noEmit && VITE_API_URL=https://owensapi.com  vite build",
     "preview": "vite preview"
   },
   "dependencies": {
