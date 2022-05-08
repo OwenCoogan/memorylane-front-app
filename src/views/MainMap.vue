@@ -1,7 +1,9 @@
 <template>
-  <div  v-if="geolocationAllowed ===true" class="flex">
-    <PostList/>
+  <div  v-if="geolocationAllowed ===true" class="lg:flex">
+    <PostList class="hidden md:block"/>
     <Map/>
+    <PostListMobile class="block md:hidden"/>
+
   </div>
   <div v-else>
     Allow Geolocation Please
@@ -12,6 +14,7 @@
 <script>
 import Map from '@/components/UI/Map.vue'
 import PostList from '@/components/UI/PostList.vue'
+import PostListMobile from '@/components/UI/Utilities/SliderPostMobile.vue'
 import { usePostsStore } from '../stores/posts';
 const postStore = usePostsStore()
 
@@ -23,6 +26,7 @@ export default {
   components: {
       Map,
       PostList,
+      PostListMobile,
   },
   data() {
     return {

@@ -47,11 +47,13 @@
                     <p class="font-bold">{{user.comments?.length}}</p>
                     <p class="text-xs">Comments</p>
                 </div>
-                <button v-if="isEditable === true" @click="toggleForm()" class="bg-teal-500">
-                  <p>Edit Profile</p>
-                </button>
+                <div class="text-center">
+                  <button v-if="isEditable === true" @click="toggleForm()" class="bg-teal-500">
+                    <p>Edit Profile</p>
+                  </button>
+                </div>
             </div>
-            <section v-if="isEditable === true && formToggled === true">
+            <section v-if="isEditable === true">
               <EditUserForm
                 @updatedUser="getUserProfile"
                 :user="user"
@@ -119,8 +121,10 @@ export default {
     getUserType(){
       if( UsersStore.getAuth.user.id === this.user.id ){
         this.isEditable = true
-        console.log(this.isEditable)
       }
+    },
+    toggleForm(){
+      this.formToggled = !this.formToggled
     },
     async getUserProfile(){
       await UsersStore.getUserProfile(this.$route.params.id)

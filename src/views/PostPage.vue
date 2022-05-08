@@ -36,18 +36,18 @@
             <div class="border-b border-gray-100"></div>
             <h2>Comments</h2>
             <div class="comment-list">
-              <div class="my-2 max-w-lg flex gap-3 rounded-md bg-white p-2 text-black shadow" v-for="comment in post.comments" v-bind:key="comment.content">
+              <div class="my-2 flex gap-3 rounded-md bg-white p-2 text-black shadow" v-for="comment in post.comments" v-bind:key="comment.content">
               <!-- Photo -->
               <div class="mt-2">
                 <img class="w-10 rounded-full shadow" :src='`${comment.author.images ? comment.author.images[0] : "https://jsl-online.com/wp-content/uploads/2017/01/placeholder-user.png"}`' alt="" srcset="" />
               </div>
               <!-- Content -->
-              <div>
+              <div class="w-full">
                 <!-- Header -->
                 <div class="flex items-center justify-between py-1 pr-2">
                   <!-- Author -->
                   <div>
-                    <a href="#" class="text-teal-400 hover:underline">{{comment.author.name}}</a>
+                    <router-link :to="`/userProfile/${comment.author.id}`" class="text-teal-400 hover:underline">{{comment.author.name}}</router-link>
                     <span class="text-sm font-thin text-gray-500"> {{this.formatDate(comment.createdAt)}}</span>
                   </div>
                 </div>
