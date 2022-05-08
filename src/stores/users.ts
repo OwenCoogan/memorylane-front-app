@@ -62,8 +62,17 @@ export const useUsersStore = defineStore({
         return err
       })
     },
-
     async getUserProfile(payload:any){
+      await axios.get(`${import.meta.env.VITE_API_URL}/v1/user/${payload}/`)
+      .then((res)=>{
+        this.viewedProfile =  res.data.data
+        return this.viewedProfile
+      })
+      .catch((err)=>{
+        return err
+      })
+    },
+    async addFriend(payload:any){
       await axios.get(`${import.meta.env.VITE_API_URL}/v1/user/${payload}/`)
       .then((res)=>{
         this.viewedProfile =  res.data.data

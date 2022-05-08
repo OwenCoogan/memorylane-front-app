@@ -1,6 +1,6 @@
 <template>
-<div class="dark:bg-black dark:text-white">
-  <Header/>
+<div class="dark:bg-slate-900 dark:text-white h-screen">
+  <Header />
   <router-view />
   </div>
 </template>
@@ -17,9 +17,20 @@ export default {
   methods:{
     checkDevice(){
     },
+    checkTheme(){
+      const theme = localStorage.getItem('color-theme')
+      if(theme){
+        document.documentElement.classList.add(theme);
+      }
+      else{
+        localStorage.setItem('color-theme','dark');
+        document.documentElement.classList.add('dark');
+      }
+    }
   },
   mounted(){
     this.checkDevice();
+    this.checkTheme();
   }
 }
 </script>

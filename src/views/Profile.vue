@@ -13,14 +13,14 @@
   </section>
   <section class="relative bg-blueGray-200">
     <div class="container mx-auto px-4">
-      <div class=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
+      <div class=" flex flex-col min-w-0 break-words bg-white dark:bg-slate-900 w-full mb-6 shadow-xl rounded-lg ">
         <div class="px-6">
           <div class="flex flex-wrap justify-center">
           </div>
           <div class="text-center mt-12">
             <div class="flex w-1/4 m-auto">
-               <img class="inline object-cover w-64 h-64 mr-2 rounded-full" :src="user.profileImage? user.profileImage :'https://jsl-online.com/wp-content/uploads/2017/01/placeholder-user.png'" alt="Profile image"/>
-              <ImageUploadForm
+               <img class="block object-cover w-64 h-64 m-auto rounded-full" :src="user.profileImage? user.profileImage :'https://jsl-online.com/wp-content/uploads/2017/01/placeholder-user.png'" alt="Profile image"/>
+              <ImageUploadForm v-if="isEditable === true"
               :route="`http://localhost:6950/upload/user/${user.id}/profile/picture`"
               @updatedImageList="getuserProfile"
               />
@@ -52,13 +52,14 @@
                     <p>Edit Profile</p>
                   </button>
                 </div>
+                <div class="text-center">
+                  <EditUserForm v-if="isEditable === true"
+                  @updatedUser="getUserProfile"
+                  :user="user"
+                  />
+                  <FriendRequestButton v-else :userId="user.id"/>
+                </div>
             </div>
-            <section v-if="isEditable === true">
-              <EditUserForm
-                @updatedUser="getUserProfile"
-                :user="user"
-              />
-            </section>
           </div>
           <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
             <div class="flex flex-wrap justify-center">
@@ -93,13 +94,15 @@ import { useUsersStore } from '../stores/users'
 import PostCard from '../components/UI/PostCard.vue'
 import EditUserForm from '../components/UI/Form/EditUserForm.vue'
 import ImageUploadForm from '../components/UI/Form/UploadImageForm.vue'
+import FriendRequestButton from '../components/UI/Utilities/FriendRequestButton.vue'
 const UsersStore = useUsersStore()
 export default {
   name: 'Profile',
   components:{
     PostCard,
     EditUserForm,
-    ImageUploadForm
+    ImageUploadForm,
+    FriendRequestButton
   },
   data() {
     return {

@@ -35,20 +35,30 @@
             </div>
             <div class="border-b border-gray-100"></div>
             <h2>Comments</h2>
-            <div class="comment-list">
-              <div class="my-2 flex gap-3 rounded-md bg-white p-2 text-black shadow" v-for="comment in post.comments" v-bind:key="comment.content">
+
+            <div class="flex mb-5 -space-x-4">
+              <router-link v-for="comment in post.comments" v-bind:key="comment.content" :to="`/userProfile/${comment.author.id}`">
+              <img
+                 :src='`${comment.author.images ? comment.author.images[0] : "https://jsl-online.com/wp-content/uploads/2017/01/placeholder-user.png"}`'
+                 alt="comment-avatar"
+                 width="48" height="48" class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
+                 >
+              </router-link>
+            </div>
+            <div class="comment-list ">
+              <div class="my-2 flex gap-3 rounded-md bg-white dark:bg-slate-900 dark:bg-slate-900 p-2 text-black shadow" v-for="comment in post.comments" v-bind:key="comment.content">
               <!-- Photo -->
               <div class="mt-2">
                 <img class="w-10 rounded-full shadow" :src='`${comment.author.images ? comment.author.images[0] : "https://jsl-online.com/wp-content/uploads/2017/01/placeholder-user.png"}`' alt="" srcset="" />
               </div>
               <!-- Content -->
-              <div class="w-full">
+              <div class="w-full ">
                 <!-- Header -->
-                <div class="flex items-center justify-between py-1 pr-2">
+                <div class="flex items-center justify-between py-1 pr-2 dark:bg-slate-900">
                   <!-- Author -->
                   <div>
                     <router-link :to="`/userProfile/${comment.author.id}`" class="text-teal-400 hover:underline">{{comment.author.name}}</router-link>
-                    <span class="text-sm font-thin text-gray-500"> {{this.formatDate(comment.createdAt)}}</span>
+                    <span class="text-sm font-thin text-gray-500 mx-5"> {{this.formatDate(comment.createdAt)}}</span>
                   </div>
                 </div>
                 <!-- Context -->

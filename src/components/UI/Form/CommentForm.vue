@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex items-center self-center w-full max-w-xl p-4 overflow-hidden text-gray-600 focus-within:text-gray-400">
+  <div class="relative flex items-center self-center w-full max-w-xl p-4 overflow-hidden text-gray-600 focus-within:text-gray-400 dark:bg-slate-900">
       <img class='w-10 h-10 object-cover rounded-full shadow mr-2 cursor-pointer' alt='User avatar' :src='`
                 ${usersStore.getProfile.profile_image ? usersStore.getProfile.profile_image.profile_image : "https://jsl-online.com/wp-content/uploads/2017/01/placeholder-user.png"}`'>
       <span class="absolute inset-y-0 right-0 flex items-center pr-6">
@@ -9,13 +9,15 @@
             </svg>
           </button>
       </span>
-        <input type="text" class="w-full py-2 pl-4 pr-10 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400 focus:bg-white focus:outline-none focus:border-teal-500 focus:text-gray-900 focus:shadow-outline-blueborder-radius: 25px" v-model="this.comment" placeholder="Post a comment..." autocomplete="off">
+        <input type="text" class="w-full py-2 pl-4 pr-10 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400 focus:bg-white dark:bg-slate-900 focus:outline-none focus:border-teal-500 focus:text-gray-900 focus:shadow-outline-blueborder-radius: 25px" v-model="this.comment" placeholder="Post a comment..." autocomplete="off">
   </div>
-  <p style="color:red" v-if="this.error !=null">{{this.error}}</p>
-  <p style="color:green" v-if="this.message !=null">{{this.message}}</p>
+  <SuccessMessage v-if="this.error ===null && this.message !=null" :message="this.message" />
+  <ErrorMessage v-if="this.message ===null && this.error !=null" :message="this.error" />
 </template>
 <script>
 import axios from 'axios'
+import SuccessMessage from '../Utilities/ValidationMessages/SuccessMessage.vue'
+import ErrorMessage from '../Utilities/ValidationMessages/ErrorMessage.vue'
 import { useUsersStore } from '../../../stores/users'
 const usersStore = useUsersStore()
 export default {
@@ -36,7 +38,8 @@ export default {
     }
   },
   components:{
-
+    SuccessMessage,
+    ErrorMessage,
 
   },
   mounted(){

@@ -2,8 +2,8 @@
   <div class="p-6">
     <!--Card 1-->
     <div class="max-w-sm rounded overflow-hidden shadow-lg m-auto">
-      <img class="w-full" v-if="img[0]" :src="`http://0.0.0.0:6950/resources/static/assets/uploads/post/${img[0].name}`" :alt="img[0].name">
-      <div class="px-6 py-4">
+      <img class="w-full " v-if="img[0]" :src="`http://0.0.0.0:6950/resources/static/assets/uploads/post/${img[0].name}`" :alt="img[0].name">
+      <div class="px-6 py-4  dark:border-solid dark:border dark:border-white">
         <div class="font-bold text-xl mb-2">{{ title }}</div>
         <p class="text-gray-700 text-base">
         {{description}}
@@ -19,8 +19,8 @@
           <span v-for="tag in tags" :key="tag.name" class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 mx-auto">{{tag}}</span>
         </div>
         <div class="flex">
-          <router-link  :to="'/Post/'+id"  class="block w-1/2 m-auto text-center bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mb-2 mx-auto">View Post</router-link>
-          <SwitchPosition class="block w-1/2 border m-auto text-center b-solid rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mb-2" :lat="lat" :long="long" />
+          <router-link  :to="'/Post/'+id"  class="block w-1/3 m-auto text-center bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mb-2 mx-auto">View Post</router-link>
+          <SwitchPosition class="block w-1/2 border bg-teal-500 m-auto text-center  rounded-full px-3 py-1 text-sm font-semibold text-white mb-2 border-none" :lat="lat" :long="long" />
           </div>
         </div>
       </div>

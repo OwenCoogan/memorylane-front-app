@@ -6,11 +6,12 @@
     margin: auto;
     display: block;" min="1" max="100" class="w-full h-2 bg-teal-100 appearance-none" v-model="range" @change="this.getPosts(this.range)">
     <div class="flex">
+
       <BackToCurrentPositionButton class=" text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-teal-600 dark:hover:bg-teal-700 focus:outline-none dark:focus:ring-teal-800 block m-auto" style="z-index:9999"/>
-      <CreatePostForm v-if="this.formPostCreateShown === true "/>
-      <button @click="toggleForm()" class="my-6 text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-teal-600 dark:hover:bg-teal-700 focus:outline-none dark:focus:ring-teal-800 block m-auto">
-      <p v-if="this.formPostCreateShown === false">Create a Post</p>
-      <p v-else >X</p>
+
+      <CreatePostForm id="popup-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full"/>
+      <button class="my-6 text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-teal-600 dark:hover:bg-teal-700 focus:outline-none dark:focus:ring-teal-800 block m-auto" data-modal-toggle="popup-modal">
+        Create Post
       </button>
     </div>
   </div>

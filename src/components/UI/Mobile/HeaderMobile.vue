@@ -1,5 +1,5 @@
 <template>
-  <nav class="block fixed inset-x-0 bottom-0 bg-white shadow z-50">
+  <nav class="block fixed inset-x-0 bottom-0 bg-white dark:bg-slate-900 shadow z-50">
       <div class="flex justify-between">
         <router-link to="/map" class="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1 tab-button--mobile">
           <DocumentPictogram/>

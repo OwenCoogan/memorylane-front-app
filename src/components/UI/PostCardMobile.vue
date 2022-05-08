@@ -1,5 +1,5 @@
 <template>
-    <div class="relative flex flex-col justify-between   bg-white shadow-md rounded-3xl  bg-cover text-gray-800  overflow-hidden cursor-pointer w-full object-cover object-center rounded-lg shadow-md h-56 w-auto my-2"
+    <div class="relative flex flex-col justify-between   bg-white dark:bg-slate-900 shadow-md rounded-3xl  bg-cover text-gray-800  overflow-hidden cursor-pointer w-full object-cover object-center rounded-lg shadow-md h-56 w-auto my-2"
 					:style="
           img[0]?
           `background-image:url('http://0.0.0.0:6950/resources/static/assets/uploads/post/${img[0].name}')`
@@ -10,7 +10,7 @@
 					<div class="relative flex flex-row items-end  h-72 w-full ">
 						<div class="absolute right-0 top-0 m-2">
 							<svg xmlns="http://www.w3.org/2000/svg"
-								class="h-9 w-9 p-2 text-gray-200 hover:text-blue-400 rounded-full hover:bg-white transition ease-in duration-200 "
+								class="h-9 w-9 p-2 text-gray-200 hover:text-blue-400 rounded-full hover:bg-white dark:bg-slate-900 transition ease-in duration-200 "
 								fill="none" viewBox="0 0 24 24" stroke="currentColor">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 									d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>

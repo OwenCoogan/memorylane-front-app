@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-center items-center mt-52">
     <div class="w-full max-w-xs">
-      <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" @submit="handleRegister"
+      <form class="bg-white dark:bg-slate-900 shadow-md rounded px-8 pt-6 pb-8 mb-4" @submit="handleRegister"
       >
         <div class="identity-input mb-4">
           <label
