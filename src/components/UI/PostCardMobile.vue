@@ -1,21 +1,21 @@
 <template>
-    <div class="relative flex flex-col justify-between   bg-white dark:bg-slate-900 shadow-md rounded-3xl  bg-cover text-gray-800  overflow-hidden cursor-pointer w-full object-cover object-center rounded-lg shadow-md h-56 w-auto my-2"
+    <div class="relative flex flex-col justify-between bg-white dark:bg-slate-900 shadow-md rounded-3xl  bg-cover text-gray-800  overflow-hidden cursor-pointer w-full object-cover object-center rounded-lg shadow-md h-56 w-auto my-2"
 					:style="
           img[0]?
           `background-image:url('http://0.0.0.0:6950/resources/static/assets/uploads/post/${img[0].name}')`
           :'https://montessori-neokids.fr/wp-content/themes/neokids/assets/img/post_default.jpg'
 
           ">
-					<div class="absolute bg-gradient-to-t from-green-400 to-blue-400  opacity-50 inset-0 z-0"></div>
+					<div class="absolute bg-gradient-to-t from-teal-400 to-teal-900 dark:from-slate-400 dark:to-slate-900  opacity-50 inset-0 z-0"></div>
 					<div class="relative flex flex-row items-end  h-72 w-full ">
-						<div class="absolute right-0 top-0 m-2">
+						<router-link :to="'/Post/'+id" class="absolute right-0 top-0 m-2">
 							<svg xmlns="http://www.w3.org/2000/svg"
 								class="h-9 w-9 p-2 text-gray-200 hover:text-blue-400 rounded-full hover:bg-white dark:bg-slate-900 transition ease-in duration-200 "
 								fill="none" viewBox="0 0 24 24" stroke="currentColor">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 									d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
 							</svg>
-						</div>
+						</router-link>
 						<div class="p-6 rounded-lg  flex flex-col w-full z-10 ">
 							<h4 class="mt-1 text-white text-xl font-semibold  leading-tight truncate">{{title}}
 							</h4>
