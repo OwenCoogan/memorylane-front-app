@@ -1,6 +1,8 @@
 <template>
+<div class="dark:bg-black dark:text-white">
   <Header/>
-  <router-view/>
+  <router-view />
+  </div>
 </template>
 <script>
 import Header from '@/components/UI/Header.vue'
