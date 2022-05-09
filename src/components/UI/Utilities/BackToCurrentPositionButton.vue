@@ -1,5 +1,5 @@
 <template>
-  <button class="bg-teal-500 hover:bg-teal-700 text-white font-bold flex" @click="BackToUserPosition()" :disabled="userPositionActive===true">
+  <button class="dark:bg-gray-900 bg-teal-500 hover:bg-teal-700 hover:dark:bg-gray-700 text-white font-bold flex w-full text-center" @click="BackToUserPosition()" :disabled="userPositionActive===true">
     <p class="px-3">Current Position</p>
     <GeolocPinPicto class="w-6 inline-block"/>
   </button>

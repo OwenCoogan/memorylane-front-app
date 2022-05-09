@@ -1,7 +1,8 @@
 <template>
   <div  v-if="geolocationAllowed ===true" class="lg:flex">
-    <PostList class="hidden md:block"/>
+    <Sidebar style="height:90vh" class="h-full hidden md:block "/>
     <Map/>
+    <PostList class="hidden md:block bg-gray-50 dark:bg-gray-800"/>
     <PostListMobile class="block md:hidden"/>
   </div>
   <div v-else>
@@ -25,6 +26,8 @@
 import Map from '@/components/UI/Map.vue'
 import PostList from '@/components/UI/PostList.vue'
 import PostListMobile from '@/components/UI/Utilities/SliderPostMobile.vue'
+import Sidebar from '@/components/UI/Utilities/Sidebar.vue'
+
 import { usePostsStore } from '../stores/posts';
 const postStore = usePostsStore()
 
@@ -37,6 +40,7 @@ export default {
       Map,
       PostList,
       PostListMobile,
+      Sidebar
   },
   data() {
     return {

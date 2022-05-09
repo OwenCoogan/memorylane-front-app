@@ -1,7 +1,7 @@
 <template>
 <div class="dark:bg-slate-900 dark:text-white h-screen">
-  <Header />
-  <router-view />
+  <Header style="height:10vh"/>
+  <router-view tyle="height:90vh"/>
   </div>
 </template>
 <script>

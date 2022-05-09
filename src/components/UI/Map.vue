@@ -1,5 +1,5 @@
 <template>
-  <div class="lg:w-2/3 z-40 h-2/6 lg:h-screen" id="mapContainer">
+  <div class="lg:w-1/2 lg:h-5/6 z-40 h-2/6 m-auto" id="mapContainer">
     <Loader class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"/>
   </div>
 </template>

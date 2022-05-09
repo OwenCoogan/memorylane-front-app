@@ -12,7 +12,7 @@ h1,h2,h3{
   font-weight:700
 }
 #mapContainer{
-  height:100vh;
+  height:80vh;
 }
 .tab-button--mobile{
   margin:auto;

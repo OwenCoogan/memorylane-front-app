@@ -46,6 +46,12 @@ const routes = [
     name: 'Profile',
     meta: { requiresAuth: true },
     component: () => import(/* webpackChunkName: "about" */ '@/views/Profile.vue')
+  },
+  {
+    path: '/createPost',
+    name: 'Create Post',
+    meta: { requiresAuth: true },
+    component: () => import(/* webpackChunkName: "about" */ '@/views/CreatePost.vue')
   }
 
 ]
